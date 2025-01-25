@@ -6,6 +6,7 @@
 #define COLS 80
 #define LINES 25
 #define MAX_TARGETS 5
+#define BORDER_MARGIN 2
 
 typedef struct {
     int x[MAX_TARGETS], y[MAX_TARGETS];
@@ -22,8 +23,8 @@ void init_targets(Target *targets) {
 
 void generate_targets(Target *targets) {
     for (int i = 0; i < MAX_TARGETS; i++) {
-        targets->x[i] = rand() % COLS;
-        targets->y[i] = rand() % LINES;
+        targets->x[i] = BORDER_MARGIN + rand() % (COLS - 2 * BORDER_MARGIN);
+        targets->y[i] = BORDER_MARGIN + rand() % (LINES - 2 * BORDER_MARGIN);
     }
 }
 

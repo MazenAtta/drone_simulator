@@ -16,6 +16,7 @@ typedef struct {
     float command_force_x, command_force_y;  // Command force components
     float prev_total_command_force_x, prev_total_command_force_y;
     float force_x,force_y;
+    float score;
 } Drone;
 
 typedef struct {
@@ -36,19 +37,34 @@ typedef struct {
 } Game;
 
 void display_controls() {
-    mvprintw(1, 5, "Drone Controller Simulation");
+    mvprintw(2, 6, "Drone Controller");
 
-    mvaddwstr(3, 5, L"⬉ q  ⬆ w  ⬈ e");
-    mvaddwstr(4, 5, L"⬅ a  ■ s  ➡ d");
-    mvaddwstr(5, 5, L"⬋ z  ⬇ x  ⬊ c");
+    mvaddwstr(4, 26, L"⬉ q  ⬆ w  ⬈ e");
+    mvaddwstr(5, 26, L"⬅ a  ■ s  ➡ d");
+    mvaddwstr(6, 26, L"⬋ z  ⬇ x  ⬊ c");
 
-    mvprintw(7, 5, "Other Commands:");
-    mvprintw(8, 5, "[b] begin  |  [s] Stop  |  [r] Reset  |  [k] Quit");
+    attron(A_BOLD);
+    mvprintw(8, 6, "Other Commands:");
+    attroff(A_BOLD);
+    mvprintw(9, 6, "[b] Begin  |  [s] Stop/Start  |  [r] Reset  |  [k] Quit");
 }
 
 void display_drone_state(Drone *drone) {
-    mvprintw(10, 5, "Drone Position: X = %f, Y = %f", drone->x, drone->y);
-    mvprintw(11, 5, "Velocity: VX = %f, VY = %f", drone->vx, drone->vy);
+    attron(A_BOLD);
+    mvprintw(13, 6, "Drone Position: ");
+    attroff(A_BOLD);
+    printw("X = %f, Y = %f", drone->x, drone->y);
+
+    attron(A_BOLD);
+    mvprintw(14, 6, "Drone Velocity: ");
+    attroff(A_BOLD);
+    printw("VX = %f, VY = %f", drone->vx, drone->vy);
+
+    attron(A_BOLD);
+    mvprintw(15, 6, "Score: ");
+    attroff(A_BOLD);
+    printw("%f", drone->score);
+
     refresh();
 }
 
@@ -71,26 +87,65 @@ void highlight_button(HighlightState *state) {
     // Highlight the button by changing its color
     attron(COLOR_PAIR(1));
     switch (state->button) {
-            //mvaddwstr(3, 5, L"⬉ q  ⬆ w  ⬈ e");
-            //mvaddwstr(4, 5, L"⬅ a  ■ s  ➡ d");
-            //mvaddwstr(5, 5, L"⬋ z  ⬇ x  ⬊ c");
-            //mvprintw(8, 5, "[b] begin  |  [s] Stop  |  [r] Reset  |  [k] Quit");
-
-        case 'q': mvprintw(3, 5, "⬉ q"); break;
-        case 'w': mvprintw(3, 10, "⬆ w"); break;
-        case 'e': mvprintw(3, 15, "⬈ e"); break;
-        case 'a': mvprintw(4, 5, "⬅ a"); break;
-        case 's': mvprintw(4, 10, "■ s"); mvprintw(8, 20, "s");  break;
-        case 'd': mvprintw(4, 15, "➡ d"); break;
-        case 'z': mvprintw(5, 5, "⬋ z"); break;
-        case 'x': mvprintw(5, 10, "⬇ x"); break;
-        case 'c': mvprintw(5, 15, "⬊ c"); break;
-        case 'b': mvprintw(8, 6, "b"); break;
-        case 'r': mvprintw(8, 33, "r"); break;
-        case 'k': mvprintw(8, 47, "k"); break;
+        case 'q': mvprintw(4, 26, "⬉ q"); break;
+        case 'w': mvprintw(4, 31, "⬆ w"); break;
+        case 'e': mvprintw(4, 36, "⬈ e"); break;
+        case 'a': mvprintw(5, 26, "⬅ a"); break;
+        case 's': mvprintw(5, 31, "■ s"); mvprintw(9, 21, "s"); break;
+        case 'd': mvprintw(5, 36, "➡ d"); break;
+        case 'z': mvprintw(6, 26, "⬋ z"); break;
+        case 'x': mvprintw(6, 31, "⬇ x"); break;
+        case 'c': mvprintw(6, 36, "⬊ c"); break;
+        case 'b': mvprintw(9, 7, "b"); break;
+        case 'r': mvprintw(9, 34, "r"); break;
+        case 'k': mvprintw(9, 48, "k"); break;
     }
     attroff(COLOR_PAIR(1));
     refresh();
+}
+
+void input_display() {
+    // Get terminal size
+    int rows = 10, cols = 65;
+
+    // Draw the top and bottom borders
+    mvhline(1, 1, ACS_HLINE, cols);        // Top border
+    mvhline(rows, 1, ACS_HLINE, cols); // Bottom border
+
+    // Draw the left and right borders
+    mvvline(1, 1, ACS_VLINE, rows);        // Left border
+    mvvline(1, cols, ACS_VLINE, rows); // Right border
+
+    // Draw the corners
+    attron(A_BOLD | A_ITALIC);
+    mvprintw(1, 3, "Input Controller");
+    attroff(A_BOLD | A_ITALIC);
+    mvaddch(1, 1, ACS_ULCORNER);             // Top-left corner
+    mvaddch(1, cols, ACS_URCORNER);      // Top-right corner
+    mvaddch(rows, 1, ACS_LLCORNER);      // Bottom-left corner
+    mvaddch(rows, cols, ACS_LRCORNER); // Bottom-right corner
+}
+
+void dynamic_display() {
+    // Get terminal size
+    int rows = 18, cols = 65;
+
+    // Draw the top and bottom borders
+    mvhline(11, 1, ACS_HLINE, cols);        // Top border
+    mvhline(rows, 1, ACS_HLINE, cols); // Bottom border
+
+    // Draw the left and right borders
+    mvvline(11, 1, ACS_VLINE, rows - 11);        // Left border
+    mvvline(11, cols, ACS_VLINE, rows - 11); // Right border
+
+    // Draw the corners
+    attron(A_BOLD | A_ITALIC);
+    mvprintw(11, 3, "Dynamic Controller");
+    attroff(A_BOLD | A_ITALIC);
+    mvaddch(11, 1, ACS_ULCORNER);             // Top-left corner
+    mvaddch(11, cols, ACS_URCORNER);      // Top-right corner
+    mvaddch(rows, 1, ACS_LLCORNER);      // Bottom-left corner
+    mvaddch(rows, cols, ACS_LRCORNER); // Bottom-right corner
 }
 
 int main() {
@@ -109,8 +164,10 @@ int main() {
     cbreak();
     nodelay(stdscr, TRUE); // Make getch() non-blocking
 
+    input_display();
     display_controls();
-    Drone drone = {10.0, 10.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+    dynamic_display();
+    Drone drone;
     display_drone_state(&drone);
 
     int ch;

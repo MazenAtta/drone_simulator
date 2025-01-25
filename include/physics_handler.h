@@ -21,6 +21,7 @@ typedef struct {
     float command_force_x, command_force_y;  // Command force components
     float prev_total_command_force_x, prev_total_command_force_y;
     float force_x,force_y;
+    float score;
 } Drone;
 
 // Initialize the drone's physics

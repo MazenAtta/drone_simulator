@@ -6,6 +6,7 @@
 #define COLS 80
 #define LINES 25
 #define MAX_OBSTACLES 10
+#define BORDER_MARGIN 2
 
 typedef struct {
     int x[MAX_OBSTACLES], y[MAX_OBSTACLES];
@@ -20,8 +21,8 @@ void init_obstacles(Obstacle *obstacles) {
 
 void generate_obstacles(Obstacle *obstacles) {
     for (int i = 0; i < MAX_OBSTACLES; i++) {
-        obstacles->x[i] = rand() % COLS;
-        obstacles->y[i] = rand() % LINES;
+        obstacles->x[i] = BORDER_MARGIN + rand() % (COLS - 2 * BORDER_MARGIN);
+        obstacles->y[i] = BORDER_MARGIN + rand() % (LINES - 2 * BORDER_MARGIN);
     }
 }
 

@@ -31,6 +31,7 @@ typedef struct {
     float obstacle_prev_x[MAX_OBSTACLES], obstacle_prev_y[MAX_OBSTACLES];
     float target_prev_x[MAX_TARGETS], target_prev_y[MAX_TARGETS];
 } GamePrev;
+
 void init_ncurses() {
     initscr();
     start_color();
@@ -59,6 +60,16 @@ void draw_obstacles(Obstacle *obstacles) {
     attroff(COLOR_PAIR(2));
 }
 
+void draw_targets(Target *targets) {
+    attron(COLOR_PAIR(3)); // Green color for targets
+    for (int i = 0; i < MAX_TARGETS; i++) {
+        if (targets->x[i] != -1 && targets->y[i] != -1) {
+            mvaddch(targets->y[i], targets->x[i], '1' + i);
+        }
+    }
+    attroff(COLOR_PAIR(3));
+}
+
 void draw_border() {
     // Get terminal size
     int rows = 30, cols = 90;
@@ -80,19 +91,6 @@ void draw_border() {
     mvaddch(rows - 1, 0, ACS_LLCORNER);      // Bottom-left corner
     mvaddch(rows - 1, cols - 1, ACS_LRCORNER); // Bottom-right corner
 }
-
-
-
-void draw_targets(Target *targets) {
-    attron(COLOR_PAIR(3)); // Green color for targets
-    for (int i = 0; i < MAX_TARGETS; i++) {
-        if (targets->x[i] != -1 && targets->y[i] != -1) {
-            mvaddch(targets->y[i], targets->x[i], '1' + i);
-        }
-    }
-    attroff(COLOR_PAIR(3));
-}
-
 
 
 // Initialize the drone's parameters
@@ -145,7 +143,7 @@ void calculate_total_forces(Drone *drone, Obstacle *obstacles, Target *targets) 
 
     // Add repulsive forces
     for (int i = 0; i < MAX_OBSTACLES; i++) {
-        if (obstacles->x[i] != -1) {
+        if (obstacles->x[i] != -1 && obstacles->x[i] != targets->x[i] && obstacles->y[i] != -1 && obstacles->y[i] != targets->y[i]) {
             float dx = drone->x - obstacles->x[i];
             float dy = drone->y - obstacles->y[i];
             float distance = sqrt(dx * dx + dy * dy);
@@ -155,6 +153,12 @@ void calculate_total_forces(Drone *drone, Obstacle *obstacles, Target *targets) 
                 total_force_y += repulsion_factor * (dy / distance);
             }
         }
+        else if (obstacles->x[i] == targets->x[i] && obstacles->y[i] == targets->y[i])
+        {
+            obstacles->x[i] = -1;
+            obstacles->y[i] = -1;
+        }
+        
     }
 
     // (Optional)
@@ -246,6 +250,23 @@ void clear_screen(Drone *drone, Obstacle *obstacles, Target *targets, GamePrev *
     }
 }
 
+void score(Drone *drone, Target *targets) {
+    for (int i = 0; i < MAX_TARGETS; i++) {
+        if (targets->x[i] != -1 && targets->y[i] != -1) {
+            float dx = drone->x - targets->x[i];
+            float dy = drone->y - targets->y[i];
+            float distance = sqrt(dx * dx + dy * dy);
+            if (distance <= 1) {
+                // Clear the target
+                targets->x[i] = -1;
+                targets->y[i] = -1;
+                // Increase the score
+                drone->score += 1;
+            }
+        }
+    }
+}
+
 int main() {
     const char *output_ask = "/tmp/output_ask";
     const char *output_receive = "/tmp/output_receive";
@@ -284,6 +305,7 @@ int main() {
             draw_obstacles(&obstacles);
             draw_targets(&targets);
             draw_drone(&drone);
+            draw_border();
             refresh();
         } 
         if (game.game_start == 1) {
@@ -293,9 +315,11 @@ int main() {
                 calculate_total_forces(&drone, &obstacles, &targets);
                 update_drone(&drone);
                 clear_screen(&drone, &obstacles, &targets, &game_prev);
-                draw_drone(&drone);
+                score(&drone, &targets);
                 draw_obstacles(&obstacles);
                 draw_targets(&targets);
+                draw_drone(&drone);
+                draw_border();
                 refresh();
                 write(fd_receive, &drone, sizeof(Drone));
             }

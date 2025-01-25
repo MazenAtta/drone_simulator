@@ -67,7 +67,7 @@ int main()
 
 
     // Spawn the input process in a new terminal window with specific size
-    char *input_process_arg_list[] = {"konsole", "--geometry", "850x600", "-e", "./input_window_process", NULL};
+    char *input_process_arg_list[] = {"konsole", "--geometry", "650x400", "-e", "./input_window_process", NULL};
     if (fork() == 0) {
         execvp(input_process_arg_list[0], input_process_arg_list);
         error_exit("Failed to spawn input window process");

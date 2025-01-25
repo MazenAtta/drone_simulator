@@ -6,6 +6,7 @@
 #include <sys/wait.h>
 #include <string.h>
 #include <fcntl.h>
+#include <signal.h>
 
 void error_exit(const char *msg) {
     perror(msg);
@@ -18,12 +19,61 @@ void create_named_pipe(const char *path) {
     }
 }
 
+// Signal handlers
+volatile sig_atomic_t running = 1;
+
+void handle_stop_start(int pid[]) {
+    static int stopped = 0;
+    if (stopped) {
+        for (int i = 0; i < 6; i++) {
+            if (i != 1) { // Skip the input window process
+                kill(pid[i], SIGCONT); // Continue the process
+            }
+        }
+        stopped = 0;
+    } else {
+        for (int i = 0; i < 6; i++) {
+            if (i != 1) { // Skip the input window process
+                kill(pid[i], SIGSTOP); // Stop the process
+            }
+        }
+        stopped = 1;
+    }
+}
+
+void handle_terminate() {
+    running = 0;
+    kill(0, SIGTERM); // Terminate all processes
+}
+
+void handle_reset(int pid[], const char *process_args[][6]) {
+    // Terminate all processes
+    for (int i = 0; i < 6; i++) {
+        kill(pid[i], SIGTERM);
+        waitpid(pid[i], NULL, 0); // Wait for the process to terminate
+    }
+
+    // Restart all processes
+    for (int i = 0; i < 6; i++) {
+        pid_t new_pid = fork();
+        if (new_pid == 0) {
+            execvp(process_args[i][0], (char *const *)process_args[i]);
+            error_exit("Failed to restart process");
+        } else if (new_pid > 0) {
+            pid[i] = new_pid;
+        } else {
+            error_exit("Failed to fork process");
+        }
+    }
+}
+
 int main() 
 {
-
+    int fd_pid[6];
     // Define paths for named pipes
     const char *input_ask = "/tmp/input_ask";
     const char *input_receive = "/tmp/input_receive";
+    const char *input_signal = "/tmp/input_signal";
     const char *output_ask = "/tmp/output_ask";
     const char *output_receive = "/tmp/output_receive";
     const char *obstacle_ask = "/tmp/obstacle_ask";
@@ -36,6 +86,7 @@ int main()
     // Create named pipes
     create_named_pipe(input_ask);
     create_named_pipe(input_receive);
+    create_named_pipe(input_signal);
     create_named_pipe(output_ask);
     create_named_pipe(output_receive);
     create_named_pipe(obstacle_ask);
@@ -48,6 +99,7 @@ int main()
     // Open named pipes in the blackboard process
     int fd_input_ask = open(input_ask, O_RDWR);
     int fd_input_receive = open(input_receive, O_RDWR);
+    int fd_input_signal = open(input_signal, O_RDWR);
     int fd_output_ask = open(output_ask, O_RDWR);
     int fd_output_receive = open(output_receive, O_RDWR);
     int fd_obstacle_ask = open(obstacle_ask, O_RDWR);
@@ -57,53 +109,51 @@ int main()
     int fd_watchdog_ask = open(watchdog_ask, O_RDWR);
     int fd_watchdog_receive = open(watchdog_receive, O_RDWR);
 
+    // Define the arguments for each process
+    const char *process_args[6][6] = {
+            {"./server_process", NULL, NULL, NULL, NULL, NULL},
+            {"konsole", "--geometry", "650x400", "-e", "./input_window_process", NULL},
+            {"konsole", "--geometry", "830x565", "-e", "./output_window_process", NULL},
+            {"./obstacle_process", NULL, NULL, NULL, NULL, NULL},
+            {"./target_process", NULL, NULL, NULL, NULL, NULL},
+            {"./watchdog_process", NULL, NULL, NULL, NULL, NULL}
+        };
 
-    // Spawn the server process
-    char *server_process_arg_list[] = {"./server_process", NULL};
-    if (fork() == 0) {
-        execvp(server_process_arg_list[0], server_process_arg_list);
-        error_exit("Failed to spawn server process");
-    }                     
-
-
-    // Spawn the input process in a new terminal window with specific size
-    char *input_process_arg_list[] = {"konsole", "--geometry", "650x400", "-e", "./input_window_process", NULL};
-    if (fork() == 0) {
-        execvp(input_process_arg_list[0], input_process_arg_list);
-        error_exit("Failed to spawn input window process");
+    // Spawn the processes using the process_args array
+    for (int i = 0; i < 6; i++) {
+        pid_t pid = fork();
+        if (pid == 0) {
+            execvp(process_args[i][0], (char *const *)process_args[i]);
+            error_exit("Failed to spawn process");
+        } else if (pid > 0) {
+            fd_pid[i] = pid;
+        } else {
+            error_exit("Failed to fork process");
+        }
     }
 
-    // Spawn the output process in a new terminal window with specific size
-    char *output_process_arg_list[] = {"konsole", "--geometry", "830x565", "-e", "./output_window_process", NULL};
-    if (fork() == 0) {
-        execvp(output_process_arg_list[0], output_process_arg_list);
-        error_exit("Failed to spawn output window process");
+    char buffer[2];
+    ssize_t bytes_read;
+
+    while ((bytes_read = read(fd_input_signal, buffer, 1)) > 0) {
+        buffer[bytes_read] = '\0';
+        if (buffer[0] == 'p') {
+            handle_stop_start(fd_pid);
+        } else if (buffer[0] == 'r') {
+
+            handle_reset(fd_pid, process_args);
+        } else if (buffer[0] == 'k') {
+            handle_terminate();
+        }
     }
 
-    // Spawn the obstacle process
-    char *obstacle_process_arg_list[] = {"./obstacle_process", NULL};
-    if (fork() == 0) {
-        execvp(obstacle_process_arg_list[0], obstacle_process_arg_list);
-        error_exit("Failed to spawn obstacle window process");
-    }
-
-    // Spawn the target process in a new terminal window
-    char *target_process_arg_list[] = {"./target_process", NULL};
-    if (fork() == 0) {
-        execvp(target_process_arg_list[0], target_process_arg_list);
-        error_exit("Failed to spawn target window process");
-    }
-
-    // Spawn the watchdog process
-    char *watchdog_process_arg_list[] = {"./watchdog_process", NULL};
-    if (fork() == 0) {
-        execvp(watchdog_process_arg_list[0], watchdog_process_arg_list);
-        error_exit("Failed to spawn watchdog window process");
+    if (bytes_read == -1) {
+        perror("read");
     }
 
     // Wait for all child processes to finish
     for (int i = 0; i < 6; i++) {
-        wait(NULL);
+        waitpid(fd_pid[i], NULL, 0);
     }
 
     // Close and remove named pipes
@@ -117,7 +167,6 @@ int main()
     close(fd_target_receive);
     close(fd_watchdog_ask);
     close(fd_watchdog_receive);
-
 
     // Remove named pipes
     unlink(input_ask);

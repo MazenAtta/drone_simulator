@@ -46,7 +46,7 @@ void display_controls() {
     attron(A_BOLD);
     mvprintw(8, 6, "Other Commands:");
     attroff(A_BOLD);
-    mvprintw(9, 6, "[b] Begin  |  [s] Stop/Start  |  [r] Reset  |  [k] Quit");
+    mvprintw(9, 6, "[b] Begin  |  [p] Stop/Start  |  [r] Reset  |  [k] Quit");
 }
 
 void display_drone_state(Drone *drone) {
@@ -91,14 +91,15 @@ void highlight_button(HighlightState *state) {
         case 'w': mvprintw(4, 31, "⬆ w"); break;
         case 'e': mvprintw(4, 36, "⬈ e"); break;
         case 'a': mvprintw(5, 26, "⬅ a"); break;
-        case 's': mvprintw(5, 31, "■ s"); mvprintw(9, 21, "s"); break;
+        case 's': mvprintw(5, 31, "■ s"); break;
         case 'd': mvprintw(5, 36, "➡ d"); break;
         case 'z': mvprintw(6, 26, "⬋ z"); break;
         case 'x': mvprintw(6, 31, "⬇ x"); break;
         case 'c': mvprintw(6, 36, "⬊ c"); break;
         case 'b': mvprintw(9, 7, "b"); break;
-        case 'r': mvprintw(9, 34, "r"); break;
-        case 'k': mvprintw(9, 48, "k"); break;
+        case 'p': mvprintw(9, 21, "p"); break;
+        case 'r': mvprintw(9, 40, "r"); break;
+        case 'k': mvprintw(9, 54, "k"); break;
     }
     attroff(COLOR_PAIR(1));
     refresh();
@@ -153,9 +154,11 @@ int main() {
 
     const char *input_ask = "/tmp/input_ask";
     const char *input_receive = "/tmp/input_receive";
+    const char *input_signal = "/tmp/input_signal";
 
     int fd_receive = open(input_receive, O_WRONLY);
     int fd_ask = open(input_ask, O_RDONLY | O_NONBLOCK);
+    int fd_signal = open(input_signal, O_WRONLY);
     Game game;
     initscr();
     start_color(); // Start color functionality
@@ -177,15 +180,18 @@ int main() {
         ch = getch();
         if (ch != ERR) { // If a key was pressed
             switch (ch) {
-                case 'b': case 'q': case 'w': case 'e': case 'a': case 's': case 'd': case 'z': case 'x': case 'c' : case 'p': case 'r': case 'k':
-                    if(ch != 'b') game.command = ch;
-                    else if(ch == 'b') game.game_start = 1;
-                    write(fd_receive, &game, sizeof(Game));
-                    highlight_state.button = ch;
-                    highlight_state.highlight_end = time(NULL) + 1; // Highlight for 1 second
-                    break;
-                default:
-                    refresh();
+            case 'b': case 'q': case 'w': case 'e': case 'a': case 's': case 'd': case 'z': case 'x': case 'c' : case 'p': case 'r': case 'k': case 'l':
+                if(ch != 'b') game.command = ch;
+                else if(ch == 'b') game.game_start = 1;
+                write(fd_receive, &game, sizeof(Game));
+                highlight_state.button = ch;
+                highlight_state.highlight_end = time(NULL) + 1; // Highlight for 1 second
+                if (ch == 'p' || ch == 'r' || ch == 'k') {
+                write(fd_signal, &ch, sizeof(ch)); // Write to signal buffer
+                }
+                break;
+            default:
+                refresh();
             }
         }
 

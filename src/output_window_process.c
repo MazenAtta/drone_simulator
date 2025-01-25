@@ -176,11 +176,6 @@ void calculate_total_forces(Drone *drone, Obstacle *obstacles, Target *targets) 
         }
     }
     */
-    /*if (total_force_x < 1) {
-        total_force_x = 0;
-    } else if (total_force_y < 1) {
-        total_force_y = 0;
-    }*/
 
     // Store the total force for use in the update function
     drone->force_x = total_force_x;

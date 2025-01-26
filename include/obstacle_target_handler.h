@@ -15,16 +15,6 @@ typedef struct {
     int id[MAX_TARGETS];
 } Target;
 
-// Initialize obstacles and targets
-void init_obstacles(Obstacle obstacles[]);
-void init_targets(Target targets[]);
 
-// Randomly generate obstacles and targets
-void generate_obstacles(Obstacle obstacles[]);
-void generate_targets(Target targets[]);
-
-// Draw obstacles and targets
-void draw_obstacles(Obstacle obstacles[]);
-void draw_targets(Target targets[]);
 
 #endif

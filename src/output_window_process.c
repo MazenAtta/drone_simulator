@@ -4,33 +4,11 @@
 #include <stdlib.h>
 #include <fcntl.h>
 #include <math.h>
+#include <time.h>
+#include <stdio.h>
 #include "physics_handler.h"
 #include "obstacle_target_handler.h"
-
-#define DRONE_SYMBOL '+'
-#define FORCE_UP -1
-#define FORCE_DOWN 1
-#define FORCE_LEFT -1
-#define FORCE_RIGHT 1
-
-
-typedef struct {
-    int command;
-    int Obstacle_x[MAX_OBSTACLES], Obstacle_y[MAX_OBSTACLES];
-    int Target_x[MAX_TARGETS], Target_y[MAX_TARGETS], target_id[MAX_TARGETS];
-    int game_pause;
-    int game_start;
-    int game_over;
-    int game_reset;
-    int score;
-    int level;
-} Game;
-
-typedef struct {
-    float drone_prev_x, drone_prev_y;
-    float obstacle_prev_x[MAX_OBSTACLES], obstacle_prev_y[MAX_OBSTACLES];
-    float target_prev_x[MAX_TARGETS], target_prev_y[MAX_TARGETS];
-} GamePrev;
+#include "ncurses_handler.h"
 
 void init_ncurses() {
     initscr();
@@ -45,6 +23,22 @@ void init_ncurses() {
     refresh();
 }
 
+void log_execution(const char *log_file) {
+    FILE *log_fp = fopen(log_file, "a");
+    if (log_fp == NULL) {
+        perror("Failed to open log file");
+        exit(EXIT_FAILURE);
+    }
+
+    time_t now = time(NULL);
+    if (now == (time_t)-1) {
+        perror("Failed to get current time");
+        exit(EXIT_FAILURE);
+    }
+
+    fprintf(log_fp, "PID: %d, Time: %ld\n", getpid(), now);
+    fclose(log_fp);
+}
 
 void draw_drone(Drone *drone) {
     mvaddch((int)drone->y, (int)drone->x, DRONE_SYMBOL | COLOR_PAIR(1));
@@ -92,7 +86,6 @@ void draw_border() {
     mvaddch(rows - 1, cols - 1, ACS_LRCORNER); // Bottom-right corner
 }
 
-
 // Initialize the drone's parameters
 void init_drone(Drone *drone) {
     drone->x = 10.0;
@@ -110,7 +103,6 @@ void init_drone(Drone *drone) {
 }
 
 void update_drone_state(Drone *drone, char command) {
-
     switch (command) {
         case 'q': drone->command_force_y += cos(45) * FORCE_UP; drone->command_force_x +=  cos(45) * FORCE_LEFT; break;
         case 'w': drone->command_force_y += FORCE_UP; break;
@@ -281,6 +273,11 @@ void score(Drone *drone, Target *targets) {
 int main() {
     const char *output_ask = "/tmp/output_ask";
     const char *output_receive = "/tmp/output_receive";
+    const char *log_folder = "log";
+    const char *log_file = "log/output_window_process_log.txt";
+
+    // Create log folder if it doesn't exist
+    mkdir(log_folder, 0777);
 
     int fd_receive = open(output_receive, O_WRONLY | O_NONBLOCK);
     int fd_ask = open(output_ask, O_RDONLY | O_NONBLOCK);
@@ -300,7 +297,6 @@ int main() {
 
     while (1) 
     {
-        
         if (game.game_start == 0) {
             read(fd_ask, &game, sizeof(Game));
             for (int i = 0; i < MAX_OBSTACLES; i++) {
@@ -335,6 +331,7 @@ int main() {
             refresh();
             write(fd_receive, &drone, sizeof(Drone));
         }
+        log_execution(log_file); // Log execution details
         usleep(100000);
     }
 

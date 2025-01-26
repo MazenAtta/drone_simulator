@@ -7,34 +7,13 @@
 #include <locale.h>
 #include <time.h>
 #include "obstacle_target_handler.h"
-
-typedef struct {
-    float x, y;           // Position
-    float vx, vy;         // Velocity
-    float ax, ay;         // Acceleration
-    float prev_x, prev_y;  // For Euler’s method
-    float command_force_x, command_force_y;  // Command force components
-    float prev_total_command_force_x, prev_total_command_force_y;
-    float force_x,force_y;
-    float score;
-} Drone;
+#include "physics_handler.h"
+#include "ncurses_handler.h"
 
 typedef struct {
     char button;
     time_t highlight_end;
 } HighlightState;
-
-typedef struct {
-    int command;
-    int Obstacle_x[MAX_OBSTACLES], Obstacle_y[MAX_OBSTACLES];
-    int Target_x[MAX_TARGETS], Target_y[MAX_TARGETS], target_id[MAX_TARGETS];
-    int game_pause;
-    int game_start;
-    int game_over;
-    int game_reset;
-    int score;
-    int level;
-} Game;
 
 void display_controls() {
     mvprintw(2, 6, "Drone Controller");
@@ -76,6 +55,21 @@ void display_drone_state(Drone *drone) {
 void error_exit(const char *msg) {
     perror(msg);
     exit(EXIT_FAILURE);
+}
+
+void log_execution(const char *log_file) {
+    FILE *log_fp = fopen(log_file, "a");
+    if (log_fp == NULL) {
+        error_exit("Failed to open log file");
+    }
+
+    time_t now = time(NULL);
+    if (now == (time_t)-1) {
+        error_exit("Failed to get current time");
+    }
+
+    fprintf(log_fp, "PID: %d, Time: %ld\n", getpid(), now);
+    fclose(log_fp);
 }
 
 void highlight_button(HighlightState *state) {
@@ -160,6 +154,11 @@ int main() {
     const char *input_ask = "/tmp/input_ask";
     const char *input_receive = "/tmp/input_receive";
     const char *input_signal = "/tmp/input_signal";
+    const char *log_folder = "log";
+    const char *log_file = "log/input_window_process_log.txt";
+
+    // Create log folder if it doesn't exist
+    mkdir(log_folder, 0777);
 
     int fd_receive = open(input_receive, O_WRONLY | O_NONBLOCK);
     int fd_ask = open(input_ask, O_RDONLY | O_NONBLOCK);
@@ -206,6 +205,7 @@ int main() {
         }
 
         highlight_button(&highlight_state);
+        log_execution(log_file); // Log execution details
     }
 
     endwin();

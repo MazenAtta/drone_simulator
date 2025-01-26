@@ -5,26 +5,32 @@
 #include <string.h>
 #include <physics_handler.h>
 
+
 #define DRONE_SYMBOL '+'
-#define APPLY_MOVEMENT 0
-#define QUIT 1
-#define RESET 2
-#define STOP 3
-#define RESET_GAME 4
+#define FORCE_UP -1
+#define FORCE_DOWN 1
+#define FORCE_LEFT -1
 #define FORCE_RIGHT 1
-#define FORCE_UP -1.0
-#define FORCE_DOWN 1.0
-#define FORCE_LEFT -1.0
+
+typedef struct {
+    int command;
+    int Obstacle_x[MAX_OBSTACLES], Obstacle_y[MAX_OBSTACLES];
+    int Target_x[MAX_TARGETS], Target_y[MAX_TARGETS], target_id[MAX_TARGETS];
+    int game_pause;
+    int game_start;
+    int game_over;
+    int game_reset;
+    int score;
+    int level;
+} Game;
+
+typedef struct {
+    float drone_prev_x, drone_prev_y;
+    float obstacle_prev_x[MAX_OBSTACLES], obstacle_prev_y[MAX_OBSTACLES];
+    float target_prev_x[MAX_TARGETS], target_prev_y[MAX_TARGETS];
+} GamePrev;
 
 
-// Initialize ncurses
-void init_ncurses();
-
-// Draw the drone at a specific position
-void draw_drone(Drone *drone, char *status);
-
-// Close ncurses properly
-void close_ncurses();
 
 #endif
 

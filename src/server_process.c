@@ -4,46 +4,29 @@
 #include <sys/select.h>
 #include <string.h>
 #include <fcntl.h>
-
-#define BUFFER_SIZE 256
-#define MAX_OBSTACLES 10
-#define MAX_TARGETS 5
-
-typedef struct {
-    float x, y;           // Position
-    float vx, vy;         // Velocity
-    float ax, ay;         // Acceleration
-    float prev_x, prev_y;  // For Euler’s method
-    float command_force_x, command_force_y;  // Command force components
-    float prev_total_command_force_x, prev_total_command_force_y;
-    float force_x,force_y;
-    float score;
-} Drone;
-
-typedef struct {
-    int x[MAX_OBSTACLES], y[MAX_OBSTACLES];
-} Obstacle;
-
-typedef struct {
-    int x[MAX_TARGETS], y[MAX_TARGETS];
-    int id[MAX_TARGETS];
-} Target;
-
-typedef struct {
-    int command;
-    int Obstacle_x[MAX_OBSTACLES], Obstacle_y[MAX_OBSTACLES];
-    int Target_x[MAX_TARGETS], Target_y[MAX_TARGETS], target_id[MAX_TARGETS];
-    int game_pause;
-    int game_start;
-    int game_over;
-    int game_reset;
-    int score;
-    int level;
-} Game;
+#include <time.h>
+#include "physics_handler.h"
+#include "obstacle_target_handler.h"
+#include "ncurses_handler.h"
 
 void error_exit(const char *msg) {
     perror(msg);
     exit(EXIT_FAILURE);
+}
+
+void log_execution(const char *log_file) {
+    FILE *log_fp = fopen(log_file, "a");
+    if (log_fp == NULL) {
+        error_exit("Failed to open log file");
+    }
+
+    time_t now = time(NULL);
+    if (now == (time_t)-1) {
+        error_exit("Failed to get current time");
+    }
+
+    fprintf(log_fp, "PID: %d, Time: %ld\n", getpid(), now);
+    fclose(log_fp);
 }
 
 int main() {
@@ -51,11 +34,13 @@ int main() {
     const char *input_receive = "/tmp/input_receive";
     const char *output_ask = "/tmp/output_ask";
     const char *output_receive = "/tmp/output_receive";
-    //const char *obstacle_ask = "/tmp/obstacle_ask";
     const char *obstacle_receive = "/tmp/obstacle_receive";
-    //const char *target_ask = "/tmp/target_ask";
     const char *target_receive = "/tmp/target_receive";
-    //const char *watchdog_ask = "/tmp/watchdog_ask";
+    const char *log_folder = "log";
+    const char *log_file = "log/server_process_log.txt";
+
+    // Create log folder if it doesn't exist
+    mkdir(log_folder, 0777);
 
     // Open named pipes
     int fd_output_ask = open(output_ask, O_WRONLY | O_NONBLOCK);
@@ -101,15 +86,11 @@ int main() {
             for (int i = 0; i < MAX_OBSTACLES; i++) {
                 game.Obstacle_x[i] = obstacles.x[i];
                 game.Obstacle_y[i] = obstacles.y[i];
-                //printf("Obstacle %d: x = %d, y = %d\n", i, obstacles.x[i], obstacles.y[i]);
-                //printf("Obstacle %d: x = %d, y = %d\n", i, game.Obstacle_x[i], game.Obstacle_y[i]);
             }
             for (int i = 0; i < MAX_TARGETS; i++) {
                 game.Target_x[i] = targets.x[i];
                 game.Target_y[i] = targets.y[i];
                 game.target_id[i] = targets.id[i];
-                //printf("Target %d: x = %d, y = %d, id = %d\n", i, targets.x[i], targets.y[i], targets.id[i]);
-                //printf("Target %d: x = %d, y = %d, id = %d\n", i, game.Target_x[i], game.Target_y[i], game.target_id[i]);
             }
             write(fd_output_ask, &game, sizeof(Game));
         }
@@ -120,15 +101,11 @@ int main() {
             for (int i = 0; i < MAX_OBSTACLES; i++) {
                 game.Obstacle_x[i] = obstacles.x[i];
                 game.Obstacle_y[i] = obstacles.y[i];
-                //printf("Obstacle %d: x = %d, y = %d\n", i, obstacles.x[i], obstacles.y[i]);
-                //printf("Obstacle %d: x = %d, y = %d\n", i, game.Obstacle_x[i], game.Obstacle_y[i]);
             }
             for (int i = 0; i < MAX_TARGETS; i++) {
                 game.Target_x[i] = targets.x[i];
                 game.Target_y[i] = targets.y[i];
                 game.target_id[i] = targets.id[i];
-                //printf("Target %d: x = %d, y = %d, id = %d\n", i, targets.x[i], targets.y[i], targets.id[i]);
-                //printf("Target %d: x = %d, y = %d, id = %d\n", i, game.Target_x[i], game.Target_y[i], game.target_id[i]);
             }
             if (game.game_start == 1) {
                 printf("Game started\n");
@@ -138,19 +115,14 @@ int main() {
         if (FD_ISSET(fd_input_receive, &read_fds) && game.game_start == 1) {
             ssize_t bytes_read = read(fd_input_receive, &game, sizeof(Game));
             // Update game state
-            // Update game state
             for (int i = 0; i < MAX_OBSTACLES; i++) {
                 game.Obstacle_x[i] = obstacles.x[i];
                 game.Obstacle_y[i] = obstacles.y[i];
-                //printf("Obstacle %d: x = %d, y = %d\n", i, obstacles.x[i], obstacles.y[i]);
-                //printf("Obstacle %d: x = %d, y = %d\n", i, game.Obstacle_x[i], game.Obstacle_y[i]);
             }
             for (int i = 0; i < MAX_TARGETS; i++) {
                 game.Target_x[i] = targets.x[i];
                 game.Target_y[i] = targets.y[i];
                 game.target_id[i] = targets.id[i];
-                //printf("Target %d: x = %d, y = %d, id = %d\n", i, targets.x[i], targets.y[i], targets.id[i]);
-                //printf("Target %d: x = %d, y = %d, id = %d\n", i, game.Target_x[i], game.Target_y[i], game.target_id[i]);
             }
             if (bytes_read > 0) {
                 write(fd_output_ask, &game, sizeof(Game)); // Send command to output window
@@ -167,6 +139,8 @@ int main() {
                 perror("Error reading from fd_output_receive");
             }
         }
+
+        log_execution(log_file); // Log execution details
     }
 
     // Close named pipes

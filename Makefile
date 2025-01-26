@@ -8,11 +8,11 @@ INCDIR = include
 
 # Source files
 BLACKBOARD_SRC = $(SRCDIR)/blackboard_process.c
-SERVER_SRC = $(SRCDIR)/server_process.c $(SRCDIR)/physics_handler.c $(SRCDIR)/obstacle_target_handler.c
+SERVER_SRC = $(SRCDIR)/server_process.c
 INPUT_SRC = $(SRCDIR)/input_window_process.c
-OUTPUT_SRC = $(SRCDIR)/output_window_process.c $(SRCDIR)/physics_handler.c $(SRCDIR)/obstacle_target_handler.c
-OBSTACLE_SRC = $(SRCDIR)/obstacle_process.c $(SRCDIR)/obstacle_target_handler.c
-TARGET_SRC = $(SRCDIR)/target_process.c $(SRCDIR)/obstacle_target_handler.c
+OUTPUT_SRC = $(SRCDIR)/output_window_process.c
+OBSTACLE_SRC = $(SRCDIR)/obstacle_process.c 
+TARGET_SRC = $(SRCDIR)/target_process.c 
 WATCHDOG_SRC = $(SRCDIR)/watchdog_process.c
 
 

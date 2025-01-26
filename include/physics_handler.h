@@ -24,13 +24,5 @@ typedef struct {
     float score;
 } Drone;
 
-// Initialize the drone's physics
-void init_drone(Drone *drone);
-
-// Update drone dynamics based on external forces
-void update_drone(Drone *drone);
-
-// Calculate all forces affecting the drone (command, repulsive, attractive)
-void calculate_total_forces(Drone *drone, Obstacle obstacles[], Target targets[]);
 
 #endif

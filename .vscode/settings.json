@@ -5,6 +5,8 @@
         "obstacle_target_handler.h": "c",
         "time.h": "c",
         "ncurses.h": "c",
-        "math.h": "c"
+        "math.h": "c",
+        "stdlib.h": "c",
+        "fcntl.h": "c"
     }
 }

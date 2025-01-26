@@ -2,6 +2,9 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <stdio.h>
+#include <time.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 
 #define COLS 80
 #define LINES 25
@@ -31,8 +34,28 @@ void error_exit(const char *msg) {
     exit(EXIT_FAILURE);
 }
 
+void log_execution(const char *log_file) {
+    FILE *log_fp = fopen(log_file, "a");
+    if (log_fp == NULL) {
+        error_exit("Failed to open log file");
+    }
+
+    time_t now = time(NULL);
+    if (now == (time_t)-1) {
+        error_exit("Failed to get current time");
+    }
+
+    fprintf(log_fp, "PID: %d, Time: %ld\n", getpid(), now);
+    fclose(log_fp);
+}
+
 int main() {
     const char *obstacle_receive = "/tmp/obstacle_receive";
+    const char *log_folder = "log";
+    const char *log_file = "log/obstacles_log.txt";
+
+    // Create log folder if it doesn't exist
+    mkdir(log_folder, 0777);
 
     int fd_receive = open(obstacle_receive, O_WRONLY);
     if (fd_receive < 0) {
@@ -48,6 +71,9 @@ int main() {
         if (write(fd_receive, &obstacles, sizeof(obstacles)) < 0) {
             error_exit("Failed to write to named pipe");
         }
+
+        log_execution(log_file);
+
         sleep(10); // Sleep for 10 seconds before generating new obstacles
     }
 

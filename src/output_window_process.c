@@ -110,19 +110,17 @@ void init_drone(Drone *drone) {
 }
 
 void update_drone_state(Drone *drone, char command) {
-    // Reset command forces
-    drone->command_force_x = 0.0;
-    drone->command_force_y = 0.0;
+
     switch (command) {
-        case 'q': drone->command_force_y = cos(45) * FORCE_UP; drone->command_force_x =  cos(45) * FORCE_LEFT; break;
-        case 'w': drone->command_force_y = FORCE_UP; break;
-        case 'e': drone->command_force_y = cos(45) * FORCE_UP; drone->command_force_x = cos(45) * FORCE_RIGHT; break;
-        case 'a': drone->command_force_x = FORCE_LEFT; break;
+        case 'q': drone->command_force_y += cos(45) * FORCE_UP; drone->command_force_x +=  cos(45) * FORCE_LEFT; break;
+        case 'w': drone->command_force_y += FORCE_UP; break;
+        case 'e': drone->command_force_y += cos(45) * FORCE_UP; drone->command_force_x += cos(45) * FORCE_RIGHT; break;
+        case 'a': drone->command_force_x += FORCE_LEFT; break;
         case 's': drone->command_force_y = 0; drone->command_force_x = 0; break;
-        case 'd': drone->command_force_x = FORCE_RIGHT; break;
-        case 'z': drone->command_force_y = cos(45) * FORCE_DOWN; drone->command_force_x = cos(45) * FORCE_LEFT; break;
-        case 'x': drone->command_force_y = FORCE_DOWN; break;
-        case 'c': drone->command_force_y = cos(45) * FORCE_DOWN; drone->command_force_x = cos(45) * FORCE_RIGHT; break;
+        case 'd': drone->command_force_x += FORCE_RIGHT; break;
+        case 'z': drone->command_force_y += cos(45) * FORCE_DOWN; drone->command_force_x += cos(45) * FORCE_LEFT; break;
+        case 'x': drone->command_force_y += FORCE_DOWN; break;
+        case 'c': drone->command_force_y += cos(45) * FORCE_DOWN; drone->command_force_x += cos(45) * FORCE_RIGHT; break;
         default: break;
     }
 }
@@ -141,7 +139,7 @@ void calculate_total_forces(Drone *drone, Obstacle *obstacles, Target *targets) 
     total_force_x += drag_force_x;
     total_force_y += drag_force_y;
 
-    // Add repulsive forces
+    // Add repulsive forces from obstacles
     for (int i = 0; i < MAX_OBSTACLES; i++) {
         if (obstacles->x[i] != -1 && obstacles->x[i] != targets->x[i] && obstacles->y[i] != -1 && obstacles->y[i] != targets->y[i]) {
             float dx = drone->x - obstacles->x[i];
@@ -153,29 +151,47 @@ void calculate_total_forces(Drone *drone, Obstacle *obstacles, Target *targets) 
                 total_force_y += repulsion_factor * (dy / distance);
             }
         }
-        else if (obstacles->x[i] == targets->x[i] && obstacles->y[i] == targets->y[i])
-        {
+        else if (obstacles->x[i] == targets->x[i] && obstacles->y[i] == targets->y[i]) {
             obstacles->x[i] = -1;
             obstacles->y[i] = -1;
         }
-        
     }
 
-    // (Optional)
-    // Add attractive forces
-    /*for (int i = 0; i < MAX_TARGETS; i++) {
-        if (targets[i].x != -1) {
-            float dx = targets[i].x - drone->x;
-            float dy = targets[i].y - drone->y;
-            float distance = sqrt(dx * dx + dy * dy);
-            if (distance < PERCEPTION_RADIUS && distance > 0) {  // Avoid zero division
-                float attraction_factor = ATTRACTIVE_CONSTANT * (1.0 / distance - 1.0 / PERCEPTION_RADIUS) / (distance * distance);
-                total_force_x += attraction_factor * dx / distance;
-                total_force_y += attraction_factor * dy / distance;
-            }
+    // Add repulsive forces from borders
+    int rows = 30, cols = 90;
+    float border_repulsion_factor = REPULSIVE_CONSTANT * 10; // Adjust this factor as needed
+
+    // Left border
+    if (drone->x < PERCEPTION_RADIUS) {
+        float distance = drone->x;
+        if (distance > 0) {
+            total_force_x += border_repulsion_factor * (1.0 / distance - 1.0 / PERCEPTION_RADIUS) / (distance * distance);
         }
     }
-    */
+
+    // Right border
+    if (cols - drone->x < PERCEPTION_RADIUS) {
+        float distance = cols - drone->x;
+        if (distance > 0) {
+            total_force_x -= border_repulsion_factor * (1.0 / distance - 1.0 / PERCEPTION_RADIUS) / (distance * distance);
+        }
+    }
+
+    // Top border
+    if (drone->y < PERCEPTION_RADIUS) {
+        float distance = drone->y;
+        if (distance > 0) {
+            total_force_y += border_repulsion_factor * (1.0 / distance - 1.0 / PERCEPTION_RADIUS) / (distance * distance);
+        }
+    }
+
+    // Bottom border
+    if (rows - drone->y < PERCEPTION_RADIUS) {
+        float distance = rows - drone->y;
+        if (distance > 0) {
+            total_force_y -= border_repulsion_factor * (1.0 / distance - 1.0 / PERCEPTION_RADIUS) / (distance * distance);
+        }
+    }
 
     // Store the total force for use in the update function
     drone->force_x = total_force_x;
@@ -304,21 +320,22 @@ int main() {
             refresh();
         } 
         if (game.game_start == 1) {
-            ssize_t bytes_read = read(fd_ask, &game, sizeof(Game));
-            if (bytes_read > 0) {
-                update_drone_state(&drone, game.command);
-                calculate_total_forces(&drone, &obstacles, &targets);
-                update_drone(&drone);
-                clear_screen(&drone, &obstacles, &targets, &game_prev);
-                score(&drone, &targets);
-                draw_obstacles(&obstacles);
-                draw_targets(&targets);
-                draw_drone(&drone);
-                draw_border();
-                refresh();
-                write(fd_receive, &drone, sizeof(Drone));
-            }
+            read(fd_ask, &game, sizeof(Game));
+
+            update_drone_state(&drone, game.command);
+            game.command = 0;
+            calculate_total_forces(&drone, &obstacles, &targets);
+            update_drone(&drone);
+            clear_screen(&drone, &obstacles, &targets, &game_prev);
+            score(&drone, &targets);
+            draw_obstacles(&obstacles);
+            draw_targets(&targets);
+            draw_drone(&drone);
+            draw_border();
+            refresh();
+            write(fd_receive, &drone, sizeof(Drone));
         }
+        usleep(100000);
     }
 
     endwin();

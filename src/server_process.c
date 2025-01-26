@@ -58,12 +58,12 @@ int main() {
     //const char *watchdog_ask = "/tmp/watchdog_ask";
 
     // Open named pipes
-    int fd_output_ask = open(output_ask, O_WRONLY);
-    int fd_output_receive = open(output_receive, O_RDONLY);
-    int fd_input_ask = open(input_ask, O_WRONLY);
-    int fd_input_receive = open(input_receive, O_RDONLY);
-    int fd_obstacle_receive = open(obstacle_receive, O_RDONLY);
-    int fd_target_receive = open(target_receive, O_RDONLY);
+    int fd_output_ask = open(output_ask, O_WRONLY | O_NONBLOCK);
+    int fd_output_receive = open(output_receive, O_RDONLY | O_NONBLOCK);
+    int fd_input_ask = open(input_ask, O_WRONLY | O_NONBLOCK);
+    int fd_input_receive = open(input_receive, O_RDONLY | O_NONBLOCK);
+    int fd_obstacle_receive = open(obstacle_receive, O_RDONLY | O_NONBLOCK);
+    int fd_target_receive = open(target_receive, O_RDONLY | O_NONBLOCK);
     
     if (fd_output_ask < 0 || fd_output_receive < 0 || fd_input_ask < 0 || fd_input_receive < 0 || fd_obstacle_receive < 0 || fd_target_receive < 0) {
         error_exit("Failed to open named pipes");

@@ -56,12 +56,17 @@ void display_drone_state(Drone *drone) {
     printw("X = %f, Y = %f", drone->x, drone->y);
 
     attron(A_BOLD);
-    mvprintw(14, 6, "Drone Velocity: ");
+    mvprintw(14, 6, "Drone Command Forces: ");
+    attroff(A_BOLD);
+    printw("FCX = %f, FCY = %f", drone->command_force_x, drone->command_force_y);
+
+    attron(A_BOLD);
+    mvprintw(15, 6, "Drone Velocity: ");
     attroff(A_BOLD);
     printw("VX = %f, VY = %f", drone->vx, drone->vy);
 
     attron(A_BOLD);
-    mvprintw(15, 6, "Score: ");
+    mvprintw(16, 6, "Score: ");
     attroff(A_BOLD);
     printw("%f", drone->score);
 
@@ -156,9 +161,9 @@ int main() {
     const char *input_receive = "/tmp/input_receive";
     const char *input_signal = "/tmp/input_signal";
 
-    int fd_receive = open(input_receive, O_WRONLY);
+    int fd_receive = open(input_receive, O_WRONLY | O_NONBLOCK);
     int fd_ask = open(input_ask, O_RDONLY | O_NONBLOCK);
-    int fd_signal = open(input_signal, O_WRONLY);
+    int fd_signal = open(input_signal, O_WRONLY | O_NONBLOCK);
     Game game;
     initscr();
     start_color(); // Start color functionality

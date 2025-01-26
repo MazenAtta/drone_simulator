@@ -9,7 +9,7 @@
 #define COMMAND_FORCE_STEP 1.0
 #define REPULSIVE_CONSTANT 10.0
 #define ATTRACTIVE_CONSTANT 0.1
-#define PERCEPTION_RADIUS 5.0
+#define PERCEPTION_RADIUS 2.0
 #define TIME_STEP .1  // 1 s as integration interval
 
 // Struct to represent drone dynamics

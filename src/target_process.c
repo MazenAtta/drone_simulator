@@ -16,18 +16,25 @@ int main() {
     Target targets;
     init_targets(&targets);
 
+    time_t last_generation_time = 0;
+    time_t last_log_time = 0;
     while (1) {
-        generate_targets(&targets);
-        // Send the entire Target struct
-        if (write(fd_receive, &targets, sizeof(targets)) < 0) {
-            error_exit("Failed to write to named pipe");
+        time_t current_time = time(NULL);
+
+        if (current_time - last_generation_time >= 10) {
+            generate_targets(&targets);
+            // Send the entire Obstacle struct
+            if (write(fd_receive, &targets, sizeof(targets)) < 0) {
+                error_exit("Failed to write to named pipe");
+            }
+            last_generation_time = current_time;
         }
 
-        log_execution(log_file);
-
-        sleep(10); // Sleep for 10 seconds before generating new targets
+        if (current_time - last_log_time >= 1) {
+            log_execution(log_file);
+            last_log_time = current_time;
+        }
     }
-
     close(fd_receive);
     return 0;
 }

@@ -1,6 +1,7 @@
 #ifndef OUTPUT_WINDOW_HANDLER_H
 #define OUTPUT_WINDOW_HANDLER_H
 
+#define _POSIX_C_SOURCE 199309L
 #include <ncurses.h>
 #include <unistd.h>
 #include <string.h>
@@ -9,14 +10,15 @@
 #include <math.h>
 #include <time.h>
 #include <stdio.h>
+#include <sys/stat.h>
 
 #define DRONE_MASS 1.0
 #define DRONE_FRICTION 1.0
 #define COMMAND_FORCE_STEP 1.0
 #define REPULSIVE_CONSTANT 10.0
 #define ATTRACTIVE_CONSTANT 0.1
-#define PERCEPTION_RADIUS 2.0
-#define TIME_STEP .1  // 1 s as integration interval
+#define PERCEPTION_RADIUS 5.0
+#define TIME_STEP .01  // 1 s as integration interval
 
 #define DRONE_SYMBOL '+'
 #define FORCE_UP -1
@@ -42,7 +44,7 @@ typedef struct {
     int command;
     int Obstacle_x[MAX_OBSTACLES], Obstacle_y[MAX_OBSTACLES];
     int Target_x[MAX_TARGETS], Target_y[MAX_TARGETS], target_id[MAX_TARGETS];
-    int game_pause;
+    int game_update;
     int game_start;
     int game_over;
     int game_reset;

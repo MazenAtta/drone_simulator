@@ -1,5 +1,6 @@
 #include "server_handler.h"
 
+
 int main() {
     const char *input_ask = "/tmp/input_ask";
     const char *input_receive = "/tmp/input_receive";
@@ -29,9 +30,8 @@ int main() {
     Drone drone;
     Obstacle obstacles;
     Target targets;
-    Game game;
+    Game game = {0};
 
-    game.game_start = 0;
     // Determine the maximum file descriptor value for select
     int max_fd = fd_input_receive;
     if (fd_output_receive > max_fd) max_fd = fd_output_receive;
@@ -53,58 +53,38 @@ int main() {
         if (FD_ISSET(fd_obstacle_receive, &read_fds) && FD_ISSET(fd_target_receive, &read_fds) && game.game_start == 0) {
             read(fd_obstacle_receive, &obstacles, sizeof(Obstacle));
             read(fd_target_receive, &targets, sizeof(Target));
-            // Update game state
-            for (int i = 0; i < MAX_OBSTACLES; i++) {
-                game.Obstacle_x[i] = obstacles.x[i];
-                game.Obstacle_y[i] = obstacles.y[i];
-            }
-            for (int i = 0; i < MAX_TARGETS; i++) {
-                game.Target_x[i] = targets.x[i];
-                game.Target_y[i] = targets.y[i];
-                game.target_id[i] = targets.id[i];
-            }
+            update_game_state(&game, &obstacles, &targets);
             write(fd_output_ask, &game, sizeof(Game));
         }
 
         if (FD_ISSET(fd_input_receive, &read_fds) && game.game_start == 0) {
             read(fd_input_receive, &game, sizeof(Game));
-            // Update game state
-            for (int i = 0; i < MAX_OBSTACLES; i++) {
-                game.Obstacle_x[i] = obstacles.x[i];
-                game.Obstacle_y[i] = obstacles.y[i];
-            }
-            for (int i = 0; i < MAX_TARGETS; i++) {
-                game.Target_x[i] = targets.x[i];
-                game.Target_y[i] = targets.y[i];
-                game.target_id[i] = targets.id[i];
-            }
+            update_game_state(&game, &obstacles, &targets);
             if (game.game_start == 1) {
                 printf("Game started\n");
             }   
         }
 
-        if (FD_ISSET(fd_input_receive, &read_fds) && game.game_start == 1) {
-            ssize_t bytes_read = read(fd_input_receive, &game, sizeof(Game));
-            // Update game state
-            for (int i = 0; i < MAX_OBSTACLES; i++) {
-                game.Obstacle_x[i] = obstacles.x[i];
-                game.Obstacle_y[i] = obstacles.y[i];
+        if (game.game_start == 1 && (FD_ISSET(fd_input_receive, &read_fds) || FD_ISSET(fd_obstacle_receive, &read_fds) || FD_ISSET(fd_target_receive, &read_fds))) {
+            if (FD_ISSET(fd_input_receive, &read_fds)) {
+                read(fd_input_receive, &game, sizeof(Game));
+            } else if (FD_ISSET(fd_obstacle_receive, &read_fds)) {
+                read(fd_obstacle_receive, &obstacles, sizeof(Obstacle));
+                game.game_update = 1;
+            } else if (FD_ISSET(fd_target_receive, &read_fds) && game.score % 5 == 0 && game.score > 0) {
+                read(fd_target_receive, &targets, sizeof(Target));
+                game.game_update = 2;
             }
-            for (int i = 0; i < MAX_TARGETS; i++) {
-                game.Target_x[i] = targets.x[i];
-                game.Target_y[i] = targets.y[i];
-                game.target_id[i] = targets.id[i];
-            }
-            if (bytes_read > 0) {
-                write(fd_output_ask, &game, sizeof(Game)); // Send command to output window
-            } else {
-                perror("Error reading from fd_input_receive");
-            }
+            update_game_state(&game, &obstacles, &targets);
+            write(fd_output_ask, &game, sizeof(Game));
         }
 
         if (FD_ISSET(fd_output_receive, &read_fds) && game.game_start == 1) {
             ssize_t bytes_read = read(fd_output_receive, &drone, sizeof(Drone));
             if (bytes_read > 0) {
+                game.score = drone.score;
+                game.game_update = 0;
+                game.command = 0;
                 write(fd_input_ask, &drone, sizeof(Drone));
             } else {
                 perror("Error reading from fd_output_receive");
@@ -113,7 +93,7 @@ int main() {
 
         static time_t last_log_time = 0;
         time_t current_time = time(NULL);
-        if (current_time - last_log_time >= 5) {
+        if (current_time - last_log_time >= 1) {
             log_execution(log_file); // Log execution details
             last_log_time = current_time;
         }

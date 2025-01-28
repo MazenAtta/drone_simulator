@@ -19,3 +19,24 @@ void log_execution(const char *log_file) {
     fprintf(log_fp, "PID: %d, Time: %ld\n", getpid(), now);
     fclose(log_fp);
 }
+
+void update_game_state(Game *game, Obstacle *obstacles, Target *targets) {
+    for (int i = 0; i < MAX_OBSTACLES; i++) {
+        game->Obstacle_x[i] = obstacles->x[i];
+        game->Obstacle_y[i] = obstacles->y[i];
+    }
+    for (int i = 0; i < MAX_TARGETS; i++) {
+        game->Target_x[i] = targets->x[i];
+        game->Target_y[i] = targets->y[i];
+        game->target_id[i] = targets->id[i];
+    }
+}
+
+int open_pipe(const char *pipe_name, int flags) {
+    int fd = open(pipe_name, flags);
+    if (fd < 0) {
+        perror("Failed to open named pipe");
+        exit(EXIT_FAILURE);
+    }
+    return fd;
+}

@@ -8,9 +8,12 @@
 #include <string.h>
 #include <fcntl.h>
 #include <time.h>
+#include <sys/stat.h>
+#include <poll.h>
 
 #define MAX_OBSTACLES 10
 #define MAX_TARGETS 5
+#define NUM_PIPES 6
 
 // Struct to represent drone dynamics
 typedef struct {
@@ -37,7 +40,7 @@ typedef struct {
     int command;
     int Obstacle_x[MAX_OBSTACLES], Obstacle_y[MAX_OBSTACLES];
     int Target_x[MAX_TARGETS], Target_y[MAX_TARGETS], target_id[MAX_TARGETS];
-    int game_pause;
+    int game_update;
     int game_start;
     int game_over;
     int game_reset;
@@ -47,5 +50,7 @@ typedef struct {
 
 void error_exit(const char *msg);
 void log_execution(const char *log_file);
+void update_game_state(Game *game, Obstacle *obstacles, Target *targets);
+int open_pipe(const char *pipe_name, int flags);
 
 #endif // SERVER_HANDLER_H

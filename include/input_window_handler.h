@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <locale.h>
 #include <time.h>
+#include <sys/stat.h>
 
 #define MAX_OBSTACLES 10
 #define MAX_TARGETS 5
@@ -28,7 +29,7 @@ typedef struct {
     int command;
     int Obstacle_x[MAX_OBSTACLES], Obstacle_y[MAX_OBSTACLES];
     int Target_x[MAX_TARGETS], Target_y[MAX_TARGETS], target_id[MAX_TARGETS];
-    int game_pause;
+    int game_update;
     int game_start;
     int game_over;
     int game_reset;

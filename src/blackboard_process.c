@@ -127,8 +127,6 @@ int main()
             error_exit("Failed to spawn process");
         } else if (pid > 0) {
             fd_pid[i] = pid;
-            printf("Process %d spawned\n", i);
-
         } else {
             error_exit("Failed to fork process");
         }

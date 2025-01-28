@@ -15,8 +15,16 @@ int main() {
     int fd_receive = open(input_receive, O_WRONLY | O_NONBLOCK);
     int fd_ask = open(input_ask, O_RDONLY | O_NONBLOCK);
     int fd_signal = open(input_signal, O_WRONLY | O_NONBLOCK);
+    if (fd_receive == -1 || fd_ask == -1 || fd_signal == -1) {
+        perror("Failed to open file descriptors");
+        return 1;
+    }
+
     Game game;
-    initscr();
+    if (initscr() == NULL) {
+        perror("Failed to initialize ncurses");
+        return 1;
+    }
     start_color(); // Start color functionality
     init_pair(1, COLOR_RED, COLOR_BLACK); // Initialize color pair 1 with red text on black background
     noecho();
@@ -31,23 +39,24 @@ int main() {
 
     int ch;
     HighlightState highlight_state = {0, 0}; // Initialize the highlight state
+    time_t last_log_time = 0;
 
     while (1) {
         ch = getch();
         if (ch != ERR) { // If a key was pressed
             switch (ch) {
-            case 'b': case 'q': case 'w': case 'e': case 'a': case 's': case 'd': case 'z': case 'x': case 'c' : case 'p': case 'r': case 'k': case 'l':
-                if(ch != 'b') game.command = ch;
-                else if(ch == 'b') game.game_start = 1;
-                write(fd_receive, &game, sizeof(Game));
-                highlight_state.button = ch;
-                highlight_state.highlight_end = time(NULL) + 1; // Highlight for 1 second
-                if (ch == 'p' || ch == 'r' || ch == 'k') {
-                write(fd_signal, &ch, sizeof(ch)); // Write to signal buffer
-                }
-                break;
-            default:
-                refresh();
+                case 'b': case 'q': case 'w': case 'e': case 'a': case 's': case 'd': case 'z': case 'x': case 'c': case 'p': case 'r': case 'k': case 'l':
+                    if (ch != 'b') game.command = ch;
+                    else game.game_start = 1;
+                    write(fd_receive, &game, sizeof(Game));
+                    highlight_state.button = ch;
+                    highlight_state.highlight_end = time(NULL) + 1; // Highlight for 1 second
+                    if (ch == 'p' || ch == 'r' || ch == 'k') {
+                        write(fd_signal, &ch, sizeof(ch)); // Write to signal buffer
+                    }
+                    break;
+                default:
+                    refresh();
             }
         }
 
@@ -57,15 +66,16 @@ int main() {
         }
 
         highlight_button(&highlight_state);
-        static time_t last_log_time = 0;
         time_t current_time = time(NULL);
-        if (current_time - last_log_time >= 5) {
+        if (current_time - last_log_time >= 1) {
             log_execution(log_file); // Log execution details
             last_log_time = current_time;
-        }    
+        }
     }
 
     endwin();
     close(fd_receive);
+    close(fd_ask);
+    close(fd_signal);
     return 0;
 }

@@ -5,7 +5,7 @@ int main() {
     const char *output_receive = "/tmp/output_receive";
     const char *log_folder = "log";
     const char *log_file = "log/output_window_log.txt";
-
+    const char *config_file = "config/config.yaml";
     mkdir(log_folder, 0777);
 
     int fd_receive = open(output_receive, O_WRONLY | O_NONBLOCK);
@@ -33,6 +33,7 @@ int main() {
     time_t last_log_time = 0;
 
     while (1) {
+        load_config(config_file);
         read(fd_ask, &game, sizeof(Game));
 
         if (game.game_start == 0 || game.game_update == 1) {

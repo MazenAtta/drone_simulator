@@ -11,14 +11,15 @@
 #include <time.h>
 #include <stdio.h>
 #include <sys/stat.h>
+#include <yaml.h>
 
-#define DRONE_MASS 1.0
-#define DRONE_FRICTION 1.0
-#define COMMAND_FORCE_STEP 1.0
-#define REPULSIVE_CONSTANT 10.0
-#define ATTRACTIVE_CONSTANT 0.1
-#define PERCEPTION_RADIUS 5.0
-#define TIME_STEP .01  // 1 s as integration interval
+
+// Global variables for live updates
+extern float DRONE_MASS;
+extern float DRONE_FRICTION;
+extern float REPULSIVE_CONSTANT;
+extern float PERCEPTION_RADIUS;
+extern float TIME_STEP;
 
 #define DRONE_SYMBOL '+'
 #define FORCE_UP -1
@@ -67,6 +68,8 @@ typedef struct {
     int id[MAX_TARGETS];
 } Target;
 
+
+void load_config(const char *config_file);
 void init_ncurses();
 void log_execution(const char *log_file);
 void draw_drone(Drone *drone);

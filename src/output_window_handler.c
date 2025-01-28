@@ -1,5 +1,75 @@
 #include "output_window_handler.h"
 
+// Initialize configuration variables with default values
+float DRONE_MASS = 1.0;
+float DRONE_FRICTION = 1.0;
+float REPULSIVE_CONSTANT = 10.0;
+float PERCEPTION_RADIUS = 5.0;
+float TIME_STEP = 0.01;
+
+void load_config(const char *config_file) {
+    FILE *file = fopen(config_file, "r");
+    if (!file) {
+        perror("Failed to open configuration file");
+        return;
+    }
+
+    yaml_parser_t parser;
+    yaml_document_t document;
+    yaml_node_t *node, *key_node, *value_node;
+
+    if (!yaml_parser_initialize(&parser)) {
+        fprintf(stderr, "Failed to initialize YAML parser\n");
+        fclose(file);
+        return;
+    }
+
+    yaml_parser_set_input_file(&parser, file);
+
+    if (!yaml_parser_load(&parser, &document)) {
+        fprintf(stderr, "Failed to load YAML document\n");
+        yaml_parser_delete(&parser);
+        fclose(file);
+        return;
+    }
+
+    node = yaml_document_get_root_node(&document);
+    if (node && node->type == YAML_MAPPING_NODE) {
+        for (yaml_node_pair_t *pair = node->data.mapping.pairs.start;
+             pair < node->data.mapping.pairs.top; pair++) {
+            key_node = yaml_document_get_node(&document, pair->key);
+            value_node = yaml_document_get_node(&document, pair->value);
+            if (key_node && value_node && key_node->type == YAML_SCALAR_NODE && value_node->type == YAML_SCALAR_NODE) {
+                const char *key = (const char *)key_node->data.scalar.value;
+                const char *value = (const char *)value_node->data.scalar.value;
+                char *endptr;
+                float val = strtof(value, &endptr);
+
+                if (*endptr != '\0') {
+                    mvprintw(30 - 1, 0, "Invalid value for %s: %s. Reverting to default.", key, value);
+                    continue;
+                }
+
+                if (strcmp(key, "DRONE_MASS") == 0) {
+                    if (val > 0) DRONE_MASS = val;
+                } else if (strcmp(key, "DRONE_FRICTION") == 0) {
+                    if (val >= 0) DRONE_FRICTION = val;
+                } else if (strcmp(key, "REPULSIVE_CONSTANT") == 0) {
+                    if (val >= 0) REPULSIVE_CONSTANT = val;
+                } else if (strcmp(key, "PERCEPTION_RADIUS") == 0) {
+                    if (val > 0) PERCEPTION_RADIUS = val;
+                } else if (strcmp(key, "TIME_STEP") == 0) {
+                    if (val >= 0.01 && val <= 0.1) TIME_STEP = val;
+                }
+            }
+        }
+    }
+
+    yaml_document_delete(&document);
+    yaml_parser_delete(&parser);
+    fclose(file);
+}
+
 void init_ncurses() {
     initscr();
     start_color();
@@ -105,6 +175,10 @@ void update_drone_state(Drone *drone, char command) {
         case 'c': drone->command_force_y += cos(45) * FORCE_DOWN; drone->command_force_x += cos(45) * FORCE_RIGHT; break;
         default: break;
     }
+    if (drone->command_force_x > 5) drone->command_force_x = 5;
+    if (drone->command_force_x < -5) drone->command_force_x = -5;
+    if (drone->command_force_y > 5) drone->command_force_y = 5;
+    if (drone->command_force_y < -5) drone->command_force_y = -5;
 }
 
 void calculate_total_forces(Drone *drone, Obstacle *obstacles, Target *targets) {

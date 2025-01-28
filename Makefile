@@ -1,7 +1,7 @@
 # Compiler and flags
 CC = gcc
 CFLAGS = -Wall -Wextra -D_XOPEN_SOURCE_EXTENDED -Iinclude
-LDFLAGS = -lncursesw -lm
+LDFLAGS = -lncursesw -lm -lyaml
 # Directories
 SRCDIR = src
 INCDIR = include

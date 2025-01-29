@@ -7,7 +7,7 @@ SRCDIR = src
 INCDIR = include
 
 # Source files
-BLACKBOARD_SRC = $(SRCDIR)/blackboard_process.c
+BLACKBOARD_SRC = $(SRCDIR)/blackboard_process.c $(SRCDIR)/blackboard_handler.c
 SERVER_SRC = $(SRCDIR)/server_process.c $(SRCDIR)/server_handler.c
 INPUT_SRC = $(SRCDIR)/input_window_process.c $(SRCDIR)/input_window_handler.c
 OUTPUT_SRC = $(SRCDIR)/output_window_process.c $(SRCDIR)/output_window_handler.c 
@@ -31,8 +31,8 @@ WATCHDOG_EXEC = watchdog_process
 all: $(BLACKBOARD_EXEC) $(SERVER_EXEC) $(INPUT_EXEC) $(OUTPUT_EXEC) $(OBSTACLE_EXEC) $(TARGET_EXEC) $(WATCHDOG_EXEC)
 
 # Build individual executables
-$(BLACKBOARD_EXEC): $(BLACKBOARD_SRC)
-	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS)
+$(BLACKBOARD_EXEC): $(BLACKBOARD_SRC) $(INCDIR)/blackboard_handler.h
+	$(CC) $(CFLAGS) $(BLACKBOARD_SRC) -o $@ $(LDFLAGS)
 
 $(SERVER_EXEC): $(SERVER_SRC) $(INCDIR)/server_handler.h
 	$(CC) $(CFLAGS) $(SERVER_SRC) -o $@ $(LDFLAGS)

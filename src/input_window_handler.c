@@ -1,5 +1,6 @@
 #include "input_window_handler.h"
 
+// Display the control instructions on the screen
 void display_controls() {
     mvprintw(2, 6, "Drone Controller");
 
@@ -13,6 +14,7 @@ void display_controls() {
     mvprintw(9, 6, "[b] Begin  |  [p] Stop/Start  |  [r] Reset  |  [k] Quit");
 }
 
+// Display the current state of the drone
 void display_drone_state(Drone *drone) {
     attron(A_BOLD);
     mvprintw(13, 6, "Drone Position: ");
@@ -37,11 +39,13 @@ void display_drone_state(Drone *drone) {
     refresh();
 }
 
+// Print an error message and exit the program
 void error_exit(const char *msg) {
     perror(msg);
     exit(EXIT_FAILURE);
 }
 
+// Log the execution details to a file
 void log_execution(const char *log_file) {
     FILE *log_fp = fopen(log_file, "a");
     if (log_fp == NULL) {
@@ -57,6 +61,7 @@ void log_execution(const char *log_file) {
     fclose(log_fp);
 }
 
+// Highlight a specific button on the screen
 void highlight_button(HighlightState *state) {
     if (state->highlight_end == 0) return; // No button to highlight
 
@@ -89,6 +94,7 @@ void highlight_button(HighlightState *state) {
     refresh();
 }
 
+// Display the input controller window
 void input_display() {
     // Get terminal size
     int rows = 10, cols = 65;
@@ -111,6 +117,7 @@ void input_display() {
     mvaddch(rows, cols, ACS_LRCORNER); // Bottom-right corner
 }
 
+// Display the dynamic controller window
 void dynamic_display() {
     // Get terminal size
     int rows = 18, cols = 65;

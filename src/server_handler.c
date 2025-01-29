@@ -1,10 +1,12 @@
 #include "server_handler.h"
 
+// Function to print an error message and exit the program
 void error_exit(const char *msg) {
     perror(msg);
     exit(EXIT_FAILURE);
 }
 
+// Function to log the execution details to a log file
 void log_execution(const char *log_file) {
     FILE *log_fp = fopen(log_file, "a");
     if (log_fp == NULL) {
@@ -20,6 +22,7 @@ void log_execution(const char *log_file) {
     fclose(log_fp);
 }
 
+// Function to update the game state with the positions of obstacles and targets
 void update_game_state(Game *game, Obstacle *obstacles, Target *targets) {
     for (int i = 0; i < MAX_OBSTACLES; i++) {
         game->Obstacle_x[i] = obstacles->x[i];
@@ -32,6 +35,7 @@ void update_game_state(Game *game, Obstacle *obstacles, Target *targets) {
     }
 }
 
+// Function to open a named pipe and return its file descriptor
 int open_pipe(const char *pipe_name, int flags) {
     int fd = open(pipe_name, flags);
     if (fd < 0) {

@@ -1,5 +1,6 @@
 #include "obstacle_handler.h"
 
+// Initialize obstacles to be off-screen by default
 void init_obstacles(Obstacle *obstacles) {
     for (int i = 0; i < MAX_OBSTACLES; i++) {
         obstacles->x[i] = -1; // Off-screen by default
@@ -7,6 +8,7 @@ void init_obstacles(Obstacle *obstacles) {
     }
 }
 
+// Generate random positions for obstacles within the screen boundaries
 void generate_obstacles(Obstacle *obstacles) {
     for (int i = 0; i < MAX_OBSTACLES; i++) {
         obstacles->x[i] = BORDER_MARGIN + rand() % (COLS - 2 * BORDER_MARGIN);
@@ -14,11 +16,13 @@ void generate_obstacles(Obstacle *obstacles) {
     }
 }
 
+// Print an error message and exit the program
 void error_exit(const char *msg) {
     perror(msg);
     exit(EXIT_FAILURE);
 }
 
+// Log the execution details to a specified log file
 void log_execution(const char *log_file) {
     FILE *log_fp = fopen(log_file, "a");
     if (log_fp == NULL) {
@@ -30,6 +34,7 @@ void log_execution(const char *log_file) {
         error_exit("Failed to get current time");
     }
 
+    // Log the process ID and current time
     fprintf(log_fp, "PID: %d, Time: %ld\n", getpid(), now);
     fclose(log_fp);
 }

@@ -12,6 +12,7 @@ int main() {
     // Create log folder if it doesn't exist
     mkdir(log_folder, 0777);
 
+    // Open file descriptors for communication
     int fd_receive = open(input_receive, O_WRONLY | O_NONBLOCK);
     int fd_ask = open(input_ask, O_RDONLY | O_NONBLOCK);
     int fd_signal = open(input_signal, O_WRONLY | O_NONBLOCK);
@@ -21,16 +22,18 @@ int main() {
     }
 
     Game game;
+    // Initialize ncurses
     if (initscr() == NULL) {
         perror("Failed to initialize ncurses");
         return 1;
     }
     start_color(); // Start color functionality
     init_pair(1, COLOR_RED, COLOR_BLACK); // Initialize color pair 1 with red text on black background
-    noecho();
-    cbreak();
+    noecho(); // Disable echoing of typed characters
+    cbreak(); // Disable line buffering
     nodelay(stdscr, TRUE); // Make getch() non-blocking
 
+    // Display initial UI components
     input_display();
     display_controls();
     dynamic_display();
@@ -41,6 +44,7 @@ int main() {
     HighlightState highlight_state = {0, 0}; // Initialize the highlight state
     time_t last_log_time = 0;
 
+    // Main loop
     while (1) {
         ch = getch();
         if (ch != ERR) { // If a key was pressed
@@ -48,7 +52,7 @@ int main() {
                 case 'b': case 'q': case 'w': case 'e': case 'a': case 's': case 'd': case 'z': case 'x': case 'c': case 'p': case 'r': case 'k': case 'l':
                     if (ch != 'b') game.command = ch;
                     else game.game_start = 1;
-                    write(fd_receive, &game, sizeof(Game));
+                    write(fd_receive, &game, sizeof(Game)); // Send game command
                     highlight_state.button = ch;
                     highlight_state.highlight_end = time(NULL) + 1; // Highlight for 1 second
                     if (ch == 'p' || ch == 'r' || ch == 'k') {
@@ -56,16 +60,17 @@ int main() {
                     }
                     break;
                 default:
-                    refresh();
+                    refresh(); // Refresh the screen
             }
         }
 
+        // Read drone state from input_ask
         ssize_t bytes_read = read(fd_ask, &drone, sizeof(Drone));
         if (bytes_read > 0) {
-            display_drone_state(&drone);
+            display_drone_state(&drone); // Update drone state display
         }
 
-        highlight_button(&highlight_state);
+        highlight_button(&highlight_state); // Highlight button if needed
         time_t current_time = time(NULL);
         if (current_time - last_log_time >= 1) {
             log_execution(log_file); // Log execution details
@@ -73,6 +78,7 @@ int main() {
         }
     }
 
+    // Cleanup
     endwin();
     close(fd_receive);
     close(fd_ask);

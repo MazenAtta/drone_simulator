@@ -8,6 +8,7 @@ float PERCEPTION_RADIUS = 5.0;
 float TIME_STEP = 0.01;
 int OBSTACLES_HIT = 0;
 
+// Load configuration from a YAML file
 void load_config(const char *config_file) {
     FILE *file = fopen(config_file, "r");
     if (!file) {
@@ -71,6 +72,7 @@ void load_config(const char *config_file) {
     fclose(file);
 }
 
+// Initialize ncurses library for terminal graphics
 void init_ncurses() {
     initscr();
     start_color();
@@ -84,6 +86,7 @@ void init_ncurses() {
     refresh();
 }
 
+// Log execution details to a file
 void log_execution(const char *log_file) {
     FILE *log_fp = fopen(log_file, "a");
     if (log_fp == NULL) {
@@ -101,10 +104,12 @@ void log_execution(const char *log_file) {
     fclose(log_fp);
 }
 
+// Draw the drone on the screen
 void draw_drone(Drone *drone) {
     mvaddch((int)drone->y, (int)drone->x, DRONE_SYMBOL | COLOR_PAIR(1));
 }
 
+// Draw obstacles on the screen
 void draw_obstacles(Obstacle *obstacles) {
     attron(COLOR_PAIR(2)); // Orange color for obstacles
     for (int i = 0; i < MAX_OBSTACLES; i++) {
@@ -115,6 +120,7 @@ void draw_obstacles(Obstacle *obstacles) {
     attroff(COLOR_PAIR(2));
 }
 
+// Draw targets on the screen
 void draw_targets(Target *targets) {
     attron(COLOR_PAIR(3)); // Green color for targets
     for (int i = 0; i < MAX_TARGETS; i++) {
@@ -125,6 +131,7 @@ void draw_targets(Target *targets) {
     attroff(COLOR_PAIR(3));
 }
 
+// Draw the border of the simulation area
 void draw_border() {
     // Get terminal size
     int rows = 30, cols = 90;
@@ -147,6 +154,7 @@ void draw_border() {
     mvaddch(rows - 1, cols - 1, ACS_LRCORNER); // Bottom-right corner
 }
 
+// Initialize the drone with default values
 void init_drone(Drone *drone) {
     drone->x = 10.0;
     drone->y = 10.0;
@@ -163,6 +171,7 @@ void init_drone(Drone *drone) {
     drone->score = 0;
 }
 
+// Update the drone's state based on user commands
 void update_drone_state(Drone *drone, char command) {
     switch (command) {
         case 'q': drone->command_force_y += cos(45) * FORCE_UP; drone->command_force_x +=  cos(45) * FORCE_LEFT; break;
@@ -182,6 +191,7 @@ void update_drone_state(Drone *drone, char command) {
     if (drone->command_force_y < -5) drone->command_force_y = -5;
 }
 
+// Calculate the total forces acting on the drone
 void calculate_total_forces(Drone *drone, Obstacle *obstacles, Target *targets) {
     float total_force_x = drone->command_force_x;
     float total_force_y = drone->command_force_y;
@@ -259,6 +269,7 @@ void calculate_total_forces(Drone *drone, Obstacle *obstacles, Target *targets) 
     drone->force_y = total_force_y;
 }
 
+// Update the drone's position and velocity
 void update_drone(Drone *drone) {
     drone->ax = drone->force_x / DRONE_MASS;
     drone->ay = drone->force_y / DRONE_MASS;
@@ -283,6 +294,7 @@ void update_drone(Drone *drone) {
     drone->y = new_y;
 }
 
+// Clear the screen and update previous positions
 void clear_screen(Drone *drone, Obstacle *obstacles, Target *targets, GamePrev *game_prev) {
     if ((int)drone->prev_y != (int)drone->y || (int)drone->prev_x != (int)drone->x) {
         mvaddch((int)drone->prev_y, (int)drone->prev_x, ' ');
@@ -311,6 +323,7 @@ void clear_screen(Drone *drone, Obstacle *obstacles, Target *targets, GamePrev *
     }
 }
 
+// Calculate the score based on targets hit and obstacles encountered
 void score(Drone *drone, Target *targets) {
     for (int i = 0; i < MAX_TARGETS; i++) {
         if (targets->x[i] != -1 && targets->y[i] != -1) {
@@ -320,9 +333,10 @@ void score(Drone *drone, Target *targets) {
             if (distance <= 1) {
                 targets->x[i] = -1;
                 targets->y[i] = -1;
+                draw_targets(targets);
                 drone->score += 1;
 
-                //calculate actual score
+                // Calculate actual score
                 float obstacle_penalty = 0.1 * OBSTACLES_HIT;
 
                 drone->actual_score += 10; // Base score for hitting a target

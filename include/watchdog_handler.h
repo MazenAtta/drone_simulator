@@ -7,9 +7,9 @@
 #include <fcntl.h>
 #include <time.h>
 #include <string.h>
-
+#include <signal.h>
 #define LOG_FILES_COUNT 5
-#define TIMEOUT 11
+#define TIMEOUT 5
 
 extern const char *log_files[LOG_FILES_COUNT];
 

@@ -48,6 +48,7 @@ int main() {
                 targets.x[i] = game.Target_x[i];
                 targets.y[i] = game.Target_y[i];
                 targets.id[i] = game.target_id[i];
+                drone.score = game.score;
             }
         }
 

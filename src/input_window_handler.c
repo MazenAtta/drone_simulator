@@ -32,7 +32,7 @@ void display_drone_state(Drone *drone) {
     attron(A_BOLD);
     mvprintw(16, 6, "Score: ");
     attroff(A_BOLD);
-    printw("%f", drone->score);
+    printw("%f", drone->actual_score);
 
     refresh();
 }

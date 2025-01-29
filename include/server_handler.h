@@ -25,6 +25,7 @@ typedef struct {
     float prev_total_command_force_x, prev_total_command_force_y;
     float force_x, force_y;
     float score;
+    float actual_score;
 } Drone;
 
 typedef struct {

@@ -6,6 +6,7 @@ float DRONE_FRICTION = 1.0;
 float REPULSIVE_CONSTANT = 10.0;
 float PERCEPTION_RADIUS = 5.0;
 float TIME_STEP = 0.01;
+int OBSTACLES_HIT = 0;
 
 void load_config(const char *config_file) {
     FILE *file = fopen(config_file, "r");
@@ -201,6 +202,9 @@ void calculate_total_forces(Drone *drone, Obstacle *obstacles, Target *targets) 
                 total_force_x += repulsion_factor * (dx / distance);
                 total_force_y += repulsion_factor * (dy / distance);
             }
+            if (distance <= 1) {
+                OBSTACLES_HIT++;
+            }
         }
         else if (obstacles->x[i] == targets->x[i] && obstacles->y[i] == targets->y[i]) {
             obstacles->x[i] = -1;
@@ -216,12 +220,18 @@ void calculate_total_forces(Drone *drone, Obstacle *obstacles, Target *targets) 
         if (distance > 0) {
             total_force_x += border_repulsion_factor * (1.0 / distance - 1.0 / PERCEPTION_RADIUS) / (distance * distance);
         }
+        if (distance <= 1) {
+            OBSTACLES_HIT++;
+        }
     }
 
     if (cols - drone->x < PERCEPTION_RADIUS) {
         float distance = cols - drone->x;
         if (distance > 0) {
             total_force_x -= border_repulsion_factor * (1.0 / distance - 1.0 / PERCEPTION_RADIUS) / (distance * distance);
+        }
+        if (distance <= 1) {
+            OBSTACLES_HIT++;
         }
     }
 
@@ -230,12 +240,18 @@ void calculate_total_forces(Drone *drone, Obstacle *obstacles, Target *targets) 
         if (distance > 0) {
             total_force_y += border_repulsion_factor * (1.0 / distance - 1.0 / PERCEPTION_RADIUS) / (distance * distance);
         }
+        if (distance <= 1) {
+            OBSTACLES_HIT++;
+        }
     }
 
     if (rows - drone->y < PERCEPTION_RADIUS) {
         float distance = rows - drone->y;
         if (distance > 0) {
             total_force_y -= border_repulsion_factor * (1.0 / distance - 1.0 / PERCEPTION_RADIUS) / (distance * distance);
+        }
+        if (distance <= 1) {
+            OBSTACLES_HIT++;
         }
     }
 
@@ -305,6 +321,13 @@ void score(Drone *drone, Target *targets) {
                 targets->x[i] = -1;
                 targets->y[i] = -1;
                 drone->score += 1;
+
+                //calculate actual score
+                float obstacle_penalty = 0.1 * OBSTACLES_HIT;
+
+                drone->actual_score += 10; // Base score for hitting a target
+                drone->actual_score -= obstacle_penalty; // Penalty for obstacles
+                OBSTACLES_HIT = 0;
             }
         }
     }

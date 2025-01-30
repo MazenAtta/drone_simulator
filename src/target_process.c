@@ -9,7 +9,7 @@ int main() {
     mkdir(log_folder, 0777);
 
     // Open the named pipe for writing
-    int fd_receive = open(target_receive, O_WRONLY);
+    int fd_receive = open(target_receive, O_WRONLY | O_NONBLOCK);
     if (fd_receive < 0) {
         error_exit("Failed to open named pipe");
     }

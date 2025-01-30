@@ -42,6 +42,7 @@ void check_deadlines(int fd_signal) {
         fclose(log_fp); // Close the log file
         // Check if the time difference exceeds the timeout
         if (current_time - last_time > TIMEOUT) {
+            printf("Deadline missed for %s\n", log_files[i]); // Print a message to the console
             write(fd_signal, &signal , sizeof(signal)); // Write the signal to the signal buffer
         }
     }

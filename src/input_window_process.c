@@ -51,7 +51,10 @@ int main() {
             switch (ch) {
                 case 'b': case 'q': case 'w': case 'e': case 'a': case 's': case 'd': case 'z': case 'x': case 'c': case 'p': case 'r': case 'k': case 'l':
                     if (ch != 'b') game.command = ch;
-                    else game.game_start = 1;
+                    else if (ch == 'b') {
+                        memset(&game, 0, sizeof(Game)); // Set the whole game struct to 0
+                        game.game_start = 1;
+                    }
                     write(fd_receive, &game, sizeof(Game)); // Send game command
                     highlight_state.button = ch;
                     highlight_state.highlight_end = time(NULL) + 1; // Highlight for 1 second
@@ -62,6 +65,10 @@ int main() {
                 default:
                     refresh(); // Refresh the screen
             }
+        }
+        else if (game.game_start == 0) {
+            memset(&game, 0, sizeof(Game)); // Set the whole game struct to 0
+            write(fd_receive, &game, sizeof(Game)); // Send game command
         }
 
         // Read drone state from input_ask

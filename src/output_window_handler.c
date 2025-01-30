@@ -330,10 +330,10 @@ void score(Drone *drone, Target *targets) {
             float dx = drone->x - targets->x[i];
             float dy = drone->y - targets->y[i];
             float distance = sqrt(dx * dx + dy * dy);
-            if (distance <= 1) {
+            if (distance <= .8) {
+                mvaddch(targets->y[i], targets->x[i], ' ');
                 targets->x[i] = -1;
                 targets->y[i] = -1;
-                draw_targets(targets);
                 drone->score += 1;
 
                 // Calculate actual score

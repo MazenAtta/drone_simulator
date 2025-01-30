@@ -326,7 +326,7 @@ void clear_screen(Drone *drone, Obstacle *obstacles, Target *targets, GamePrev *
 // Calculate the score based on targets hit and obstacles encountered
 void score(Drone *drone, Target *targets) {
     for (int i = 0; i < MAX_TARGETS; i++) {
-        if (targets->x[i] != -1 && targets->y[i] != -1) {
+        if (targets->x[i] != -1 && targets->y[i] != -1 && drone->score == (i)) {
             float dx = drone->x - targets->x[i];
             float dy = drone->y - targets->y[i];
             float distance = sqrt(dx * dx + dy * dy);

@@ -15,8 +15,6 @@
 ## Introduction
 The `drone_simulator` project is a simple simulation of a drone environment involving multiple processes that communicate through named pipes. The project aims to demonstrate the usage of inter-process communication (IPC) techniques, signal handling, error management, and logging in a multi-process system.
 
-### Demo Video
-![Drone Simulator Demo]
 
 ## Architecture
 ![Architecture Diagram](graphs/architecture.png)
@@ -114,7 +112,7 @@ The architecture of the `drone_simulator` is designed to manage the interactions
 - **Description**: Captures user input and sends commands to the server process.
 
 #### Screenshot and Explanation
-![Input Window](graphs/Input_window.png)
+![Input Window](graphs/Inputwindow.png)
 
 The input window shows the following controls:
 - **Controls**: 
@@ -134,7 +132,7 @@ The input window shows the following controls:
 - **Description**: Displays the current state of the game, including the positions of the drone, obstacles, and targets.
 
 #### Screenshot and Explanation
-![Output Window](graphs/Output_window.png)
+![Output Window](graphs/Outputwindow.png)
 
 The output window shows:
 - The drone as a blue `+`.

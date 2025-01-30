@@ -11,10 +11,10 @@
 - [Error Handling](#error-handling)
 - [Signal Handling](#signal-handling)
 - [Debugging](#debugging)
+- [Repository](#repository)
 
 ## Introduction
 The `drone_simulator` project is a simple simulation of a drone environment involving multiple processes that communicate through named pipes. The project aims to demonstrate the usage of inter-process communication (IPC) techniques, signal handling, error management, and logging in a multi-process system.
-
 
 ## Architecture
 ![Architecture Diagram](graphs/architecture.png)
@@ -190,3 +190,6 @@ The following signals are handled:
 
 ## Debugging
 Debug messages and log entries are used to track the execution and state of the system. Use the log files in the `log` directory to diagnose issues.
+
+## Repository
+For more information, visit the [drone_simulator GitHub repository](https://github.com/MazenAtta/drone_simulator).

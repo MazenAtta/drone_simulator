@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/target_process.dir/src/target_process.c.o -o target_process  libtarget_handler.a

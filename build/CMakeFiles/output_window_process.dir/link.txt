@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/output_window_process.dir/src/output_window_process.c.o -o output_window_process  -lncursesw -lyaml -lm -lyaml liboutput_window_handler.a -lyaml -lm -lyaml -lm

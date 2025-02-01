@@ -9,6 +9,7 @@
         "stdlib.h": "c",
         "fcntl.h": "c",
         "output_window_handler.h": "c",
-        "server_handler.h": "c"
+        "server_handler.h": "c",
+        "*.tcc": "c"
     }
 }

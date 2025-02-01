@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/server_process.dir/src/server_process.c.o -o server_process  libserver_handler.a

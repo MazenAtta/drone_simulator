@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/obstacle_process.dir/src/obstacle_process.c.o -o obstacle_process  libobstacle_handler.a

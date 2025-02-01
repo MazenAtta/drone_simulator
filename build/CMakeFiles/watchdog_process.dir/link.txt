@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/watchdog_process.dir/src/watchdog_process.c.o -o watchdog_process  libwatchdog_handler.a

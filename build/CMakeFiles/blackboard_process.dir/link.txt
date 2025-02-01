@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/blackboard_process.dir/src/blackboard_process.c.o -o blackboard_process  libblackboard_handler.a

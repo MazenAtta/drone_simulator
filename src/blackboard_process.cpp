@@ -22,8 +22,6 @@ int main() {
         {"./server_process", NULL, NULL, NULL, NULL, NULL},
         {"konsole", "--geometry", "650x400", "-e", "./input_window_process", NULL},
         {"konsole", "--geometry", "830x565", "-e", "./output_window_process", NULL},
-        {"./obstacle_process", NULL, NULL, NULL, NULL, NULL},
-        {"./target_process", NULL, NULL, NULL, NULL, NULL},
         {"./watchdog_process", NULL, NULL, NULL, NULL, NULL}
     };
 

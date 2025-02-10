@@ -1,4 +1,6 @@
 #include "watchdog_handler.hpp"
+#include "../DDS/src/ObstaclesSubscriber.hpp"
+#include "../DDS/src/TargetsSubscriber.hpp"
 
 // Global variable to indicate if the process is paused
 volatile sig_atomic_t paused = 0;
@@ -21,6 +23,24 @@ int main() {
 
     // Set up the signal handler for SIGCONT
     signal(SIGCONT, handle_sigcont);
+
+    // Initialize DDS subscribers
+        // Initialize DDS subscribers
+    ObstaclesSubscriber* obstacle_subscriber = new ObstaclesSubscriber();
+    TargetsSubscriber* target_subscriber = new TargetsSubscriber();
+
+    if (!obstacle_subscriber->init("ObstacleTopic")) {
+        error_exit("Failed to initialize DDS Obstacle Subscriber");
+    }
+    if (!target_subscriber->init("TargetTopic")) {
+        error_exit("Failed to initialize DDS Target Subscriber");
+    }
+
+    obstacle_subscriber->waitPub();
+    target_subscriber->waitPub();
+
+    delete obstacle_subscriber;
+    delete target_subscriber;
 
     // Initial sleep before starting the main loop
     sleep(1);

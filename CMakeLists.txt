@@ -66,7 +66,7 @@ target_link_libraries(output_window_process PRIVATE output_window_handler ncurse
 target_link_libraries(input_window_process PRIVATE input_window_handler ncursesw tinfo)
 target_link_libraries(obstacle_process PRIVATE obstacle_handler ${fastrtps_LIBRARIES} ${fastcdr_LIBRARIES} fastdds fastcdr)
 target_link_libraries(target_process PRIVATE target_handler ${fastrtps_LIBRARIES} ${fastcdr_LIBRARIES} fastdds fastcdr)
-target_link_libraries(watchdog_process PRIVATE watchdog_handler)
+target_link_libraries(watchdog_process PRIVATE watchdog_handler ${fastrtps_LIBRARIES} ${fastcdr_LIBRARIES} fastdds fastcdr)
 
 # Link the output_window_handler library against the yaml library
 target_link_libraries(output_window_handler PRIVATE ${YAML_LIBRARIES} m yaml)
@@ -97,6 +97,7 @@ add_library(ObstaclesPubSubTypes ${DDS_SOURCES_CXX})
 target_link_libraries(obstacle_process PRIVATE TargetsPubSubTypes ObstaclesPubSubTypes)
 target_link_libraries(target_process PRIVATE TargetsPubSubTypes ObstaclesPubSubTypes)
 target_link_libraries(server_process PRIVATE TargetsPubSubTypes ObstaclesPubSubTypes)
+target_link_libraries(watchdog_process PRIVATE TargetsPubSubTypes ObstaclesPubSubTypes)
 
 # Include directories for generated PubSubTypes
 target_include_directories(TargetsPubSubTypes PUBLIC DDS/src/Generated)

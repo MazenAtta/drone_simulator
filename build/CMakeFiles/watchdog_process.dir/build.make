@@ -96,6 +96,15 @@ watchdog_process_EXTERNAL_OBJECTS =
 watchdog_process: CMakeFiles/watchdog_process.dir/src/watchdog_process.cpp.o
 watchdog_process: CMakeFiles/watchdog_process.dir/build.make
 watchdog_process: libwatchdog_handler.a
+watchdog_process: /usr/local/lib/libfastdds.a
+watchdog_process: /usr/local/lib/libfastcdr.a
+watchdog_process: libTargetsPubSubTypes.a
+watchdog_process: libObstaclesPubSubTypes.a
+watchdog_process: /opt/ros/foxy/lib/libfoonathan_memory-0.7.1.a
+watchdog_process: /usr/lib/x86_64-linux-gnu/libtinyxml2.so
+watchdog_process: /usr/lib/x86_64-linux-gnu/libtinyxml2.so
+watchdog_process: /usr/lib/x86_64-linux-gnu/libssl.so
+watchdog_process: /usr/lib/x86_64-linux-gnu/libcrypto.so
 watchdog_process: CMakeFiles/watchdog_process.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/mazenatta/Desktop/Master/ARP/drone_simulator/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable watchdog_process"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/watchdog_process.dir/link.txt --verbose=$(VERBOSE)

@@ -2,11 +2,9 @@
 
 // Array of log file paths
 const char *log_files[LOG_FILES_COUNT] = {
-    "log/target_log.txt",
     "log/output_window_log.txt",
     "log/input_window_log.txt",
     "log/server_log.txt",
-    "log/obstacle_log.txt"
 };
 
 // Function to print an error message and exit the program

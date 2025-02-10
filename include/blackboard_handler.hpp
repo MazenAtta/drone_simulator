@@ -13,7 +13,7 @@
 #include <sys/select.h>
 
 // Constants
-#define NUM_PROCESSES 6
+#define NUM_PROCESSES 4
 #define NUM_PIPES 10
 
 // Pipe paths

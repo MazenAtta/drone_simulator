@@ -150,7 +150,7 @@ public:
         type_.register_type(participant_);
 
         // Create the publications Topic
-        topic_ = participant_->create_topic("HelloWorld", type_.get_type_name(), TOPIC_QOS_DEFAULT);
+        topic_ = participant_->create_topic(topic_name, type_.get_type_name(), TOPIC_QOS_DEFAULT);
 
         if (topic_ == nullptr)
         {

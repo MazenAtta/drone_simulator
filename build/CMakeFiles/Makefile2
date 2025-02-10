@@ -159,8 +159,8 @@ CMakeFiles/blackboard_process.dir/clean:
 # Target rules for target CMakeFiles/server_process.dir
 
 # All Build rule for target.
-CMakeFiles/server_process.dir/all: CMakeFiles/TargetsPubSubTypes.dir/all
 CMakeFiles/server_process.dir/all: CMakeFiles/ObstaclesPubSubTypes.dir/all
+CMakeFiles/server_process.dir/all: CMakeFiles/TargetsPubSubTypes.dir/all
 CMakeFiles/server_process.dir/all: CMakeFiles/server_handler.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/server_process.dir/build.make CMakeFiles/server_process.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/server_process.dir/build.make CMakeFiles/server_process.dir/build
@@ -257,9 +257,9 @@ CMakeFiles/input_window_process.dir/clean:
 # Target rules for target CMakeFiles/obstacle_process.dir
 
 # All Build rule for target.
-CMakeFiles/obstacle_process.dir/all: CMakeFiles/TargetsPubSubTypes.dir/all
 CMakeFiles/obstacle_process.dir/all: CMakeFiles/ObstaclesPubSubTypes.dir/all
 CMakeFiles/obstacle_process.dir/all: CMakeFiles/obstacle_handler.dir/all
+CMakeFiles/obstacle_process.dir/all: CMakeFiles/TargetsPubSubTypes.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/obstacle_process.dir/build.make CMakeFiles/obstacle_process.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/obstacle_process.dir/build.make CMakeFiles/obstacle_process.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mazenatta/Desktop/Master/ARP/drone_simulator/build/CMakeFiles --progress-num=21,22 "Built target obstacle_process"
@@ -291,9 +291,9 @@ CMakeFiles/obstacle_process.dir/clean:
 # Target rules for target CMakeFiles/target_process.dir
 
 # All Build rule for target.
-CMakeFiles/target_process.dir/all: CMakeFiles/TargetsPubSubTypes.dir/all
 CMakeFiles/target_process.dir/all: CMakeFiles/ObstaclesPubSubTypes.dir/all
 CMakeFiles/target_process.dir/all: CMakeFiles/target_handler.dir/all
+CMakeFiles/target_process.dir/all: CMakeFiles/TargetsPubSubTypes.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/target_process.dir/build.make CMakeFiles/target_process.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/target_process.dir/build.make CMakeFiles/target_process.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mazenatta/Desktop/Master/ARP/drone_simulator/build/CMakeFiles --progress-num=33,34 "Built target target_process"
@@ -325,7 +325,9 @@ CMakeFiles/target_process.dir/clean:
 # Target rules for target CMakeFiles/watchdog_process.dir
 
 # All Build rule for target.
+CMakeFiles/watchdog_process.dir/all: CMakeFiles/ObstaclesPubSubTypes.dir/all
 CMakeFiles/watchdog_process.dir/all: CMakeFiles/watchdog_handler.dir/all
+CMakeFiles/watchdog_process.dir/all: CMakeFiles/TargetsPubSubTypes.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/watchdog_process.dir/build.make CMakeFiles/watchdog_process.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/watchdog_process.dir/build.make CMakeFiles/watchdog_process.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mazenatta/Desktop/Master/ARP/drone_simulator/build/CMakeFiles --progress-num=37,38 "Built target watchdog_process"
@@ -333,7 +335,7 @@ CMakeFiles/watchdog_process.dir/all: CMakeFiles/watchdog_handler.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/watchdog_process.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/mazenatta/Desktop/Master/ARP/drone_simulator/build/CMakeFiles 4
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/mazenatta/Desktop/Master/ARP/drone_simulator/build/CMakeFiles 14
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/watchdog_process.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/mazenatta/Desktop/Master/ARP/drone_simulator/build/CMakeFiles 0
 .PHONY : CMakeFiles/watchdog_process.dir/rule

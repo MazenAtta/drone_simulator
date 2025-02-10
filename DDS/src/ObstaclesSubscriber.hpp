@@ -89,6 +89,7 @@ private:
     public:
         Obstacles my_message_;
         Obstacles valid_data;
+        Obstacles invalid_data;
         std::atomic_int flag;
 
         std::atomic_int samples_;
@@ -161,7 +162,7 @@ public:
         type_.register_type(participant_);
 
         // Create the subscriptions Topic
-        topic_ = participant_->create_topic("HelloWorld", type_.get_type_name(), TOPIC_QOS_DEFAULT);
+        topic_ = participant_->create_topic(topic_name, type_.get_type_name(), TOPIC_QOS_DEFAULT);
 
         if (topic_ == nullptr)
         {
@@ -191,8 +192,13 @@ public:
     {
         if(listener_.flag == 1)
         {
+            if (listener_.valid_data != listener_.invalid_data)
+            {
+                listener_.invalid_data = listener_.valid_data;
+                listener_.flag = 0;
+                return true;
+            }
             listener_.flag = 0;
-            return true;
         }
         return false;
     }

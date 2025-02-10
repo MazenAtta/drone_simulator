@@ -121,7 +121,7 @@ int main() {
                 dds_obstacles = obstacle_subscriber->get_last_data();
                 convert_from_dds_obstacles(dds_obstacles, obstacles);
                 game.game_update = 1;
-            } else if (obstacle_subscriber->check_data_available() && game.score % 5 == 0 && game.score > 0) {
+            } else if (target_subscriber->check_data_available() && game.score % 5 == 0 && game.score > 0) {
                 dds_targets = target_subscriber->get_last_data();
                 convert_from_dds_targets(dds_targets, targets);
                 game.game_update = 2;

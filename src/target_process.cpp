@@ -1,5 +1,5 @@
 #include "target_handler.hpp"
-#include "../DDS/src/CustomPublisher.hpp"
+#include "../DDS/src/TargetsPublisher.hpp"
 
 
 void convert_to_dds_targets(const Target& src, Targets& dest)
@@ -23,8 +23,8 @@ int main() {
     mkdir(log_folder, 0777);
 
     // Initialize DDS publisher
-    DDSPublisher<Targets, TargetsPubSubType> publisher;
-    if (!publisher.init("TargetTopic")) {
+    TargetsPublisher* publisher = new TargetsPublisher();
+    if (!publisher->init("TargetTopic")) {
         error_exit("Failed to initialize DDS Publisher");
     }
 
@@ -41,9 +41,9 @@ int main() {
         if (current_time - last_generation_time >= 10) {
             generate_targets(&targets);
             convert_to_dds_targets(targets, dds_targets); // Convert to DDS message type
-            publisher.publish(dds_targets); // Publish target data using DDS
             last_generation_time = current_time; // Update the last generation time
         }
+        publisher->publish(dds_targets); // Publish target data using DDS
 
         // Log execution every second
         if (current_time - last_log_time >= 1) {
@@ -51,6 +51,6 @@ int main() {
             last_log_time = current_time; // Update the last log time
         }
     }
-
+    delete publisher;
     return 0;
 }

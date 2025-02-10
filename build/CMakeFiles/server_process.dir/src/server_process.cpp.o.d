@@ -87,8 +87,8 @@ CMakeFiles/server_process.dir/src/server_process.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/types/struct_statx.h \
  /usr/include/poll.h /usr/include/x86_64-linux-gnu/sys/poll.h \
  /usr/include/x86_64-linux-gnu/bits/poll.h \
- /home/mazenatta/Desktop/Master/ARP/drone_simulator/src/../DDS/src/CustomSubscriber.hpp \
- /home/mazenatta/Desktop/Master/ARP/drone_simulator/src/../DDS/src/Generated/TargetsPubSubTypes.hpp \
+ /home/mazenatta/Desktop/Master/ARP/drone_simulator/src/../DDS/src/ObstaclesSubscriber.hpp \
+ /home/mazenatta/Desktop/Master/ARP/drone_simulator/src/../DDS/src/Generated/ObstaclesPubSubTypes.hpp \
  /usr/local/include/fastdds/dds/core/policy/QosPolicies.hpp \
  /usr/include/c++/9/bitset /usr/include/c++/9/string \
  /usr/include/c++/9/bits/stringfwd.h /usr/include/c++/9/bits/memoryfwd.h \
@@ -323,8 +323,6 @@ CMakeFiles/server_process.dir/src/server_process.cpp.o: \
  /usr/local/include/fastcdr/xcdr/optional.hpp /usr/include/malloc.h \
  /usr/local/include/fastcdr/CdrSizeCalculator.hpp \
  /usr/local/include/fastdds/utils/md5.hpp \
- /home/mazenatta/Desktop/Master/ARP/drone_simulator/src/../DDS/src/Generated/Targets.hpp \
- /home/mazenatta/Desktop/Master/ARP/drone_simulator/src/../DDS/src/Generated/ObstaclesPubSubTypes.hpp \
  /home/mazenatta/Desktop/Master/ARP/drone_simulator/src/../DDS/src/Generated/Obstacles.hpp \
  /usr/include/c++/9/thread \
  /usr/local/include/fastdds/dds/domain/DomainParticipant.hpp \
@@ -410,4 +408,7 @@ CMakeFiles/server_process.dir/src/server_process.cpp.o: \
  /usr/local/include/fastdds/dds/core/status/LivelinessChangedStatus.hpp \
  /usr/local/include/fastdds/rtps/transport/shared_mem/SharedMemTransportDescriptor.hpp \
  /usr/local/include/fastdds/rtps/transport/PortBasedTransportDescriptor.hpp \
- /usr/local/include/fastdds/dds/subscriber/Subscriber.hpp
+ /usr/local/include/fastdds/dds/subscriber/Subscriber.hpp \
+ /home/mazenatta/Desktop/Master/ARP/drone_simulator/src/../DDS/src/TargetsSubscriber.hpp \
+ /home/mazenatta/Desktop/Master/ARP/drone_simulator/src/../DDS/src/Generated/TargetsPubSubTypes.hpp \
+ /home/mazenatta/Desktop/Master/ARP/drone_simulator/src/../DDS/src/Generated/Targets.hpp

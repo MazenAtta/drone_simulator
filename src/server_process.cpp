@@ -1,5 +1,6 @@
 #include "server_handler.hpp"
-#include "../DDS/src/CustomSubscriber.hpp"
+#include "../DDS/src/ObstaclesSubscriber.hpp"
+#include "../DDS/src/TargetsSubscriber.hpp"
 
 
 void convert_from_dds_obstacles(const Obstacles& src, Obstacle& dest)
@@ -50,20 +51,20 @@ int main() {
     Obstacles dds_obstacles; // DDS message type
     Targets dds_targets; // DDS message type
     Game game;
-
+    game.game_start = 0;
     // Initialize DDS subscribers
-    DDSSubscriber<Obstacles, ObstaclesPubSubType> obstacle_subscriber;
-    DDSSubscriber<Targets, TargetsPubSubType> target_subscriber;
+    ObstaclesSubscriber* obstacle_subscriber = new ObstaclesSubscriber();
+    TargetsSubscriber* target_subscriber = new TargetsSubscriber();
 
-    if (!obstacle_subscriber.init("ObstacleTopic")) {
+    if (!obstacle_subscriber->init("ObstacleTopic")) {
         error_exit("Failed to initialize DDS Obstacle Subscriber");
     }
-    if (!target_subscriber.init("TargetTopic")) {
+    if (!target_subscriber->init("TargetTopic")) {
         error_exit("Failed to initialize DDS Target Subscriber");
     }
 
-    obstacle_subscriber.waitPub();
-    target_subscriber.waitPub();
+    obstacle_subscriber->waitPub();
+    target_subscriber->waitPub();
 
         // Determine the maximum file descriptor value for select
     int max_fd = fd_input_receive;
@@ -80,30 +81,22 @@ int main() {
             perror("Select error");
             continue;
         }
-        // Receive obstacles and targets from DDS
-        const Obstacles* obstacle_data = obstacle_subscriber.get_valid_data();
-        if (obstacle_data) {
-            // Print the received obstacle data
-            printf("Received Obstacles:\n");
-            for (int i = 0; i < MAX_OBSTACLES; ++i) {
-                printf("Obstacle %d: x = %f, y = %f\n", i, obstacles.x[i], obstacles.y[i]);
-            }
-        }
-        const Targets* target_data = target_subscriber.get_valid_data();
 
 
-        if (obstacle_data && target_data && (game.game_start == 0)) {
-            convert_from_dds_obstacles(*obstacle_data, obstacles);
-            convert_from_dds_targets(*target_data, targets);
+
+        if (obstacle_subscriber->check_data_available() && target_subscriber->check_data_available() &&(game.game_start == 0)) {
+            // Receive obstacles and targets from DDS
+            dds_obstacles = obstacle_subscriber->get_last_data();
+            dds_targets = target_subscriber->get_last_data();
+
+            convert_from_dds_obstacles(dds_obstacles, obstacles);
+            convert_from_dds_targets(dds_targets, targets);
             update_game_state(&game, &obstacles, &targets);
             write(fd_output_ask, &game, sizeof(Game));
         }
 
         if (FD_ISSET(fd_input_receive, &read_fds) && game.game_start == 0) {
             read(fd_input_receive, &game, sizeof(Game));
-            convert_from_dds_obstacles(*obstacle_data, obstacles);
-            convert_from_dds_targets(*target_data, targets);
-            update_game_state(&game, &obstacles, &targets);
             if (game.game_start == 1) {
                 printf("Game started\n");
             }   
@@ -121,14 +114,16 @@ int main() {
             }
         }
 
-        if (game.game_start == 1 && (FD_ISSET(fd_input_receive, &read_fds) || obstacle_data || target_data)) {
+        if (game.game_start == 1) {
             if (FD_ISSET(fd_input_receive, &read_fds)) {
                 read(fd_input_receive, &game, sizeof(Game));
-            } else if (obstacle_data) {
-                convert_from_dds_obstacles(*obstacle_data, obstacles);
+            } else if (obstacle_subscriber->check_data_available()) {
+                dds_obstacles = obstacle_subscriber->get_last_data();
+                convert_from_dds_obstacles(dds_obstacles, obstacles);
                 game.game_update = 1;
-            } else if (target_data && game.score % 5 == 0 && game.score > 0) {
-                convert_from_dds_targets(*target_data, targets);
+            } else if (obstacle_subscriber->check_data_available() && game.score % 5 == 0 && game.score > 0) {
+                dds_targets = target_subscriber->get_last_data();
+                convert_from_dds_targets(dds_targets, targets);
                 game.game_update = 2;
                 game.score = 0;
             }

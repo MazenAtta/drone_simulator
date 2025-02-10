@@ -1,5 +1,5 @@
 #include "obstacle_handler.hpp"
-#include "../DDS/src/CustomPublisher.hpp"
+#include "../DDS/src/ObstaclesPublisher.hpp"
 
 
 void convert_to_dds_obstacles(const Obstacle& src, Obstacles& dest)
@@ -22,8 +22,8 @@ int main() {
     mkdir(log_folder, 0777);
 
     // Initialize DDS publisher
-    DDSPublisher<Obstacles, ObstaclesPubSubType> publisher;
-    if (!publisher.init("ObstacleTopic")) {
+    ObstaclesPublisher* publisher = new ObstaclesPublisher();
+    if (!publisher->init("ObstacleTopic")) {
         error_exit("Failed to initialize DDS Publisher");
     }
 
@@ -41,9 +41,9 @@ int main() {
             generate_obstacles(&obstacles);
             convert_to_dds_obstacles(obstacles, dds_obstacles); // Convert to DDS message type
 
-            publisher.publish(dds_obstacles); // Publish obstacle data using DDS
             last_generation_time = current_time; // Update the last generation time
         }
+            publisher->publish(dds_obstacles); // Publish obstacle data using DDS
 
         // Log execution every second
         if (current_time - last_log_time >= 1) {
@@ -51,6 +51,6 @@ int main() {
             last_log_time = current_time; // Update the last log time
         }
     }
-
+    delete publisher;
     return 0;
 }

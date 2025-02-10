@@ -3,11 +3,9 @@
 
 CMakeFiles/target_process.dir/src/target_process.cpp.o: /home/mazenatta/Desktop/Master/ARP/drone_simulator/src/target_process.cpp \
   /home/mazenatta/Desktop/Master/ARP/drone_simulator/include/target_handler.hpp \
-  /home/mazenatta/Desktop/Master/ARP/drone_simulator/DDS/src/CustomPublisher.hpp \
-  /home/mazenatta/Desktop/Master/ARP/drone_simulator/DDS/src/Generated/Obstacles.hpp \
-  /home/mazenatta/Desktop/Master/ARP/drone_simulator/DDS/src/Generated/ObstaclesPubSubTypes.hpp \
   /home/mazenatta/Desktop/Master/ARP/drone_simulator/DDS/src/Generated/Targets.hpp \
   /home/mazenatta/Desktop/Master/ARP/drone_simulator/DDS/src/Generated/TargetsPubSubTypes.hpp \
+  /home/mazenatta/Desktop/Master/ARP/drone_simulator/DDS/src/TargetsPublisher.hpp \
   /usr/include/alloca.h \
   /usr/include/asm-generic/bitsperlong.h \
   /usr/include/asm-generic/errno-base.h \
@@ -579,6 +577,8 @@ CMakeFiles/target_process.dir/src/target_process.cpp.o: /home/mazenatta/Desktop/
 
 /usr/local/include/fastdds/dds/builtin/topic/ParticipantBuiltinTopicData.hpp:
 
+/usr/local/include/fastdds/dds/builtin/topic/BuiltinTopicKey.hpp:
+
 /usr/local/include/fastdds/LibrarySettings.hpp:
 
 /usr/local/include/fastcdr/xcdr/external.hpp:
@@ -707,7 +707,9 @@ CMakeFiles/target_process.dir/src/target_process.cpp.o: /home/mazenatta/Desktop/
 
 /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h:
 
-/usr/include/x86_64-linux-gnu/bits/types/__fpos64_t.h:
+/usr/local/include/fastdds/utils/fixed_size_bitmap.hpp:
+
+/usr/include/c++/9/cmath:
 
 /usr/include/c++/9/bits/vector.tcc:
 
@@ -835,10 +837,6 @@ CMakeFiles/target_process.dir/src/target_process.cpp.o: /home/mazenatta/Desktop/
 
 /usr/include/c++/9/bits/predefined_ops.h:
 
-/usr/local/include/fastdds/rtps/common/LocatorList.hpp:
-
-/usr/include/c++/9/bits/ostream_insert.h:
-
 /usr/local/include/fastdds/rtps/common/Locator.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/types/time_t.h:
@@ -847,15 +845,15 @@ CMakeFiles/target_process.dir/src/target_process.cpp.o: /home/mazenatta/Desktop/
 
 /usr/include/c++/9/bits/stl_iterator_base_funcs.h:
 
-/usr/local/include/fastdds/rtps/transport/TransportReceiverInterface.hpp:
-
-/usr/include/alloca.h:
-
 /usr/include/x86_64-linux-gnu/bits/unistd_ext.h:
 
 /usr/include/c++/9/bits/stl_tempbuf.h:
 
 /usr/include/c++/9/cstdlib:
+
+/usr/local/include/fastdds/rtps/transport/TransportReceiverInterface.hpp:
+
+/usr/include/alloca.h:
 
 /usr/local/include/fastcdr/xcdr/optional.hpp:
 
@@ -876,6 +874,14 @@ CMakeFiles/target_process.dir/src/target_process.cpp.o: /home/mazenatta/Desktop/
 /usr/include/c++/9/bits/regex_compiler.h:
 
 /usr/include/c++/9/bits/basic_ios.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/struct_statx.h:
+
+/usr/include/c++/9/bits/stl_relops.h:
+
+/usr/include/c++/9/clocale:
+
+/usr/include/c++/9/bits/refwrap.h:
 
 /usr/local/include/fastdds/rtps/attributes/RTPSParticipantAllocationAttributes.hpp:
 
@@ -909,6 +915,44 @@ CMakeFiles/target_process.dir/src/target_process.cpp.o: /home/mazenatta/Desktop/
 
 /usr/include/x86_64-linux-gnu/bits/environments.h:
 
+/usr/local/include/fastdds/dds/domain/qos/DomainParticipantExtendedQos.hpp:
+
+/usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h:
+
+/usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h:
+
+/usr/include/c++/9/bits/locale_classes.tcc:
+
+/usr/local/include/fastdds/rtps/common/LocatorList.hpp:
+
+/usr/include/c++/9/bits/ostream_insert.h:
+
+/usr/include/c++/9/cstdio:
+
+/usr/include/c++/9/iterator:
+
+/usr/include/c++/9/bits/localefwd.h:
+
+/usr/include/c++/9/bits/cxxabi_init_exception.h:
+
+/usr/include/c++/9/bits/stl_construct.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/sigset_t.h:
+
+/usr/include/asm-generic/types.h:
+
+/usr/include/asm-generic/bitsperlong.h:
+
+/usr/include/c++/9/ext/aligned_buffer.h:
+
+/usr/local/include/fastdds/dds/topic/qos/TopicQos.hpp:
+
+/usr/include/c++/9/bits/char_traits.h:
+
+/usr/local/include/fastdds/dds/publisher/qos/PublisherQos.hpp:
+
+/home/mazenatta/Desktop/Master/ARP/drone_simulator/include/target_handler.hpp:
+
 /usr/local/include/fastdds/rtps/common/LocatorsIterator.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/types/error_t.h:
@@ -925,63 +969,27 @@ CMakeFiles/target_process.dir/src/target_process.cpp.o: /home/mazenatta/Desktop/
 
 /usr/include/c++/9/bits/locale_facets.h:
 
-/usr/include/c++/9/cstddef:
+/usr/include/c++/9/bits/stl_algobase.h:
 
-/usr/include/c++/9/bits/basic_string.tcc:
+/usr/include/x86_64-linux-gnu/bits/getopt_posix.h:
 
-/usr/local/include/fastdds/dds/core/condition/StatusCondition.hpp:
+/usr/include/time.h:
 
-/usr/include/c++/9/utility:
+/usr/include/x86_64-linux-gnu/bits/setjmp.h:
 
-/home/mazenatta/Desktop/Master/ARP/drone_simulator/DDS/src/Generated/TargetsPubSubTypes.hpp:
+/usr/include/x86_64-linux-gnu/bits/types/__fpos64_t.h:
 
-/usr/include/c++/9/cstdio:
+/usr/local/include/fastcdr/exceptions/Exception.h:
 
-/usr/include/c++/9/iterator:
+/usr/include/x86_64-linux-gnu/bits/types/struct_sched_param.h:
 
-/usr/include/x86_64-linux-gnu/bits/types/struct_statx.h:
+/usr/include/asm-generic/errno.h:
 
-/usr/include/c++/9/bits/stl_relops.h:
+/usr/include/c++/9/chrono:
 
-/usr/include/c++/9/clocale:
+/usr/include/c++/9/algorithm:
 
-/usr/include/c++/9/bits/refwrap.h:
-
-/home/mazenatta/Desktop/Master/ARP/drone_simulator/DDS/src/CustomPublisher.hpp:
-
-/usr/local/include/fastdds/dds/topic/TopicListener.hpp:
-
-/usr/include/c++/9/bits/cpp_type_traits.h:
-
-/usr/include/c++/9/bits/locale_facets.tcc:
-
-/usr/local/include/fastdds/rtps/common/VendorId_t.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/thread-shared-types.h:
-
-/usr/include/c++/9/bits/localefwd.h:
-
-/usr/include/c++/9/bits/cxxabi_init_exception.h:
-
-/usr/include/c++/9/bits/stl_construct.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/sigset_t.h:
-
-/usr/include/asm-generic/types.h:
-
-/usr/include/asm-generic/bitsperlong.h:
-
-/usr/include/c++/9/ext/aligned_buffer.h:
-
-/usr/include/x86_64-linux-gnu/bits/libc-header-start.h:
-
-/usr/local/include/fastdds/utils/fixed_size_bitmap.hpp:
-
-/usr/include/c++/9/cmath:
-
-/home/mazenatta/Desktop/Master/ARP/drone_simulator/DDS/src/Generated/ObstaclesPubSubTypes.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/iscanonical.h:
+/usr/include/asm-generic/int-ll64.h:
 
 /usr/include/c++/9/bits/stl_multiset.h:
 
@@ -1001,47 +1009,31 @@ CMakeFiles/target_process.dir/src/target_process.cpp.o: /home/mazenatta/Desktop/
 
 /usr/include/stdc-predef.h:
 
-/usr/include/c++/9/bits/stl_algobase.h:
+/home/mazenatta/Desktop/Master/ARP/drone_simulator/DDS/src/Generated/TargetsPubSubTypes.hpp:
 
-/usr/include/x86_64-linux-gnu/bits/getopt_posix.h:
+/usr/include/c++/9/cstddef:
 
-/usr/include/time.h:
+/usr/include/c++/9/bits/basic_string.tcc:
 
-/usr/include/x86_64-linux-gnu/bits/setjmp.h:
+/usr/local/include/fastdds/dds/core/condition/StatusCondition.hpp:
 
-/usr/local/include/fastcdr/exceptions/Exception.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/struct_sched_param.h:
-
-/usr/include/asm-generic/errno.h:
-
-/usr/include/c++/9/chrono:
-
-/usr/include/c++/9/algorithm:
-
-/usr/include/asm-generic/int-ll64.h:
-
-/usr/local/include/fastdds/dds/publisher/qos/PublisherQos.hpp:
-
-/home/mazenatta/Desktop/Master/ARP/drone_simulator/include/target_handler.hpp:
-
-/usr/local/include/fastdds/dds/topic/qos/TopicQos.hpp:
-
-/usr/include/c++/9/bits/char_traits.h:
-
-/usr/local/include/fastdds/dds/domain/qos/DomainParticipantExtendedQos.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h:
-
-/usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h:
-
-/usr/include/c++/9/bits/locale_classes.tcc:
+/usr/include/c++/9/utility:
 
 /usr/local/include/fastdds/rtps/common/Types.hpp:
 
 /usr/include/c++/9/bits/concept_check.h:
 
 /usr/include/c++/9/bits/allocated_ptr.h:
+
+/usr/local/include/fastdds/dds/topic/TopicListener.hpp:
+
+/usr/include/c++/9/bits/cpp_type_traits.h:
+
+/usr/include/c++/9/bits/locale_facets.tcc:
+
+/usr/local/include/fastdds/rtps/common/VendorId_t.hpp:
+
+/usr/include/x86_64-linux-gnu/bits/thread-shared-types.h:
 
 /usr/local/include/fastdds/rtps/common/EntityId_t.hpp:
 
@@ -1071,6 +1063,12 @@ CMakeFiles/target_process.dir/src/target_process.cpp.o: /home/mazenatta/Desktop/
 
 /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h:
 
+/usr/include/x86_64-linux-gnu/bits/libc-header-start.h:
+
+/home/mazenatta/Desktop/Master/ARP/drone_simulator/DDS/src/TargetsPublisher.hpp:
+
+/usr/include/x86_64-linux-gnu/bits/floatn.h:
+
 /usr/include/c++/9/bits/hash_bytes.h:
 
 /usr/include/locale.h:
@@ -1098,14 +1096,6 @@ CMakeFiles/target_process.dir/src/target_process.cpp.o: /home/mazenatta/Desktop/
 /usr/include/c++/9/bits/stl_vector.h:
 
 /usr/include/c++/9/list:
-
-/usr/local/include/fastdds/dds/builtin/topic/BuiltinTopicKey.hpp:
-
-/home/mazenatta/Desktop/Master/ARP/drone_simulator/DDS/src/Generated/Obstacles.hpp:
-
-/usr/include/wctype.h:
-
-/usr/include/sched.h:
 
 /usr/include/c++/9/bits/locale_facets_nonio.tcc:
 
@@ -1273,6 +1263,10 @@ CMakeFiles/target_process.dir/src/target_process.cpp.o: /home/mazenatta/Desktop/
 
 /usr/include/pthread.h:
 
+/usr/include/wctype.h:
+
+/usr/include/sched.h:
+
 /usr/local/include/fastdds/dds/log/Log.hpp:
 
 /usr/include/endian.h:
@@ -1337,9 +1331,9 @@ CMakeFiles/target_process.dir/src/target_process.cpp.o: /home/mazenatta/Desktop/
 
 /usr/include/x86_64-linux-gnu/bits/floatn-common.h:
 
-/usr/include/x86_64-linux-gnu/bits/floatn.h:
-
 /usr/include/x86_64-linux-gnu/bits/fp-fast.h:
+
+/usr/include/x86_64-linux-gnu/bits/iscanonical.h:
 
 /usr/include/x86_64-linux-gnu/bits/long-double.h:
 

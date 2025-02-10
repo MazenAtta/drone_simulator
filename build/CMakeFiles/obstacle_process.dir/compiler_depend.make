@@ -3,11 +3,9 @@
 
 CMakeFiles/obstacle_process.dir/src/obstacle_process.cpp.o: /home/mazenatta/Desktop/Master/ARP/drone_simulator/src/obstacle_process.cpp \
   /home/mazenatta/Desktop/Master/ARP/drone_simulator/include/obstacle_handler.hpp \
-  /home/mazenatta/Desktop/Master/ARP/drone_simulator/DDS/src/CustomPublisher.hpp \
   /home/mazenatta/Desktop/Master/ARP/drone_simulator/DDS/src/Generated/Obstacles.hpp \
   /home/mazenatta/Desktop/Master/ARP/drone_simulator/DDS/src/Generated/ObstaclesPubSubTypes.hpp \
-  /home/mazenatta/Desktop/Master/ARP/drone_simulator/DDS/src/Generated/Targets.hpp \
-  /home/mazenatta/Desktop/Master/ARP/drone_simulator/DDS/src/Generated/TargetsPubSubTypes.hpp \
+  /home/mazenatta/Desktop/Master/ARP/drone_simulator/DDS/src/ObstaclesPublisher.hpp \
   /usr/include/alloca.h \
   /usr/include/asm-generic/bitsperlong.h \
   /usr/include/asm-generic/errno-base.h \
@@ -707,7 +705,9 @@ CMakeFiles/obstacle_process.dir/src/obstacle_process.cpp.o: /home/mazenatta/Desk
 
 /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h:
 
-/usr/include/x86_64-linux-gnu/bits/types/__fpos64_t.h:
+/usr/include/c++/9/cstdio:
+
+/usr/include/c++/9/iterator:
 
 /usr/include/c++/9/bits/vector.tcc:
 
@@ -831,10 +831,6 @@ CMakeFiles/obstacle_process.dir/src/obstacle_process.cpp.o: /home/mazenatta/Desk
 
 /usr/include/c++/9/bits/predefined_ops.h:
 
-/usr/local/include/fastdds/rtps/common/LocatorList.hpp:
-
-/usr/include/c++/9/bits/ostream_insert.h:
-
 /usr/local/include/fastdds/rtps/common/Locator.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/types/time_t.h:
@@ -873,6 +869,10 @@ CMakeFiles/obstacle_process.dir/src/obstacle_process.cpp.o: /home/mazenatta/Desk
 
 /usr/include/c++/9/bits/basic_ios.h:
 
+/usr/include/x86_64-linux-gnu/bits/types/struct_statx.h:
+
+/usr/include/c++/9/bits/stl_relops.h:
+
 /usr/local/include/fastdds/rtps/attributes/RTPSParticipantAllocationAttributes.hpp:
 
 /usr/include/c++/9/backward/binders.h:
@@ -905,27 +905,25 @@ CMakeFiles/obstacle_process.dir/src/obstacle_process.cpp.o: /home/mazenatta/Desk
 
 /usr/include/x86_64-linux-gnu/bits/environments.h:
 
-/usr/local/include/fastdds/rtps/common/LocatorsIterator.hpp:
+/usr/local/include/fastdds/dds/topic/qos/TopicQos.hpp:
 
-/usr/include/x86_64-linux-gnu/bits/types/error_t.h:
+/usr/include/c++/9/bits/char_traits.h:
 
-/usr/include/c++/9/bits/basic_string.h:
+/usr/local/include/fastdds/dds/domain/qos/DomainParticipantExtendedQos.hpp:
 
-/usr/include/c++/9/bits/postypes.h:
+/usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h:
 
-/usr/local/include/fastdds/rtps/attributes/RTPSParticipantAttributes.hpp:
+/usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h:
 
-/usr/include/assert.h:
+/usr/include/c++/9/bits/locale_classes.tcc:
 
-/usr/include/x86_64-linux-gnu/c++/9/bits/ctype_inline.h:
+/usr/local/include/fastdds/rtps/common/LocatorList.hpp:
 
-/usr/include/c++/9/bits/locale_facets.h:
+/usr/include/c++/9/bits/ostream_insert.h:
 
 /usr/include/c++/9/list:
 
 /usr/include/c++/9/bits/locale_facets.tcc:
-
-/home/mazenatta/Desktop/Master/ARP/drone_simulator/DDS/src/CustomPublisher.hpp:
 
 /usr/local/include/fastdds/dds/topic/TopicListener.hpp:
 
@@ -973,6 +971,32 @@ CMakeFiles/obstacle_process.dir/src/obstacle_process.cpp.o: /home/mazenatta/Desk
 
 /home/mazenatta/Desktop/Master/ARP/drone_simulator/src/obstacle_process.cpp:
 
+/usr/include/c++/9/bits/refwrap.h:
+
+/usr/include/c++/9/clocale:
+
+/home/mazenatta/Desktop/Master/ARP/drone_simulator/DDS/src/ObstaclesPublisher.hpp:
+
+/usr/include/c++/9/bits/stl_algobase.h:
+
+/usr/include/x86_64-linux-gnu/bits/getopt_posix.h:
+
+/usr/include/time.h:
+
+/usr/include/x86_64-linux-gnu/bits/setjmp.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/__fpos64_t.h:
+
+/usr/include/c++/9/bits/allocated_ptr.h:
+
+/usr/include/c++/9/bits/postypes.h:
+
+/usr/local/include/fastdds/rtps/common/LocatorsIterator.hpp:
+
+/usr/include/x86_64-linux-gnu/bits/types/error_t.h:
+
+/usr/include/c++/9/bits/basic_string.h:
+
 /usr/include/c++/9/cstddef:
 
 /usr/include/c++/9/bits/basic_string.tcc:
@@ -980,20 +1004,6 @@ CMakeFiles/obstacle_process.dir/src/obstacle_process.cpp.o: /home/mazenatta/Desk
 /usr/local/include/fastdds/dds/core/condition/StatusCondition.hpp:
 
 /usr/include/c++/9/utility:
-
-/home/mazenatta/Desktop/Master/ARP/drone_simulator/DDS/src/Generated/TargetsPubSubTypes.hpp:
-
-/usr/include/c++/9/cstdio:
-
-/usr/include/c++/9/iterator:
-
-/usr/include/x86_64-linux-gnu/bits/types/struct_statx.h:
-
-/usr/include/c++/9/bits/stl_relops.h:
-
-/usr/include/c++/9/clocale:
-
-/usr/include/c++/9/bits/refwrap.h:
 
 /usr/include/c++/9/bits/localefwd.h:
 
@@ -1009,14 +1019,6 @@ CMakeFiles/obstacle_process.dir/src/obstacle_process.cpp.o: /home/mazenatta/Desk
 
 /usr/include/c++/9/ext/aligned_buffer.h:
 
-/usr/include/c++/9/bits/stl_algobase.h:
-
-/usr/include/x86_64-linux-gnu/bits/getopt_posix.h:
-
-/usr/include/time.h:
-
-/usr/include/x86_64-linux-gnu/bits/setjmp.h:
-
 /home/mazenatta/Desktop/Master/ARP/drone_simulator/include/obstacle_handler.hpp:
 
 /usr/local/include/fastcdr/exceptions/Exception.h:
@@ -1025,29 +1027,23 @@ CMakeFiles/obstacle_process.dir/src/obstacle_process.cpp.o: /home/mazenatta/Desk
 
 /usr/include/asm-generic/errno.h:
 
+/usr/local/include/fastdds/rtps/attributes/RTPSParticipantAttributes.hpp:
+
+/usr/include/assert.h:
+
+/usr/include/x86_64-linux-gnu/c++/9/bits/ctype_inline.h:
+
+/usr/include/c++/9/bits/locale_facets.h:
+
 /usr/include/c++/9/chrono:
 
 /usr/include/c++/9/algorithm:
 
 /usr/include/asm-generic/int-ll64.h:
 
-/usr/local/include/fastdds/dds/topic/qos/TopicQos.hpp:
-
-/usr/include/c++/9/bits/char_traits.h:
-
-/usr/local/include/fastdds/dds/domain/qos/DomainParticipantExtendedQos.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h:
-
-/usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h:
-
-/usr/include/c++/9/bits/locale_classes.tcc:
-
 /usr/local/include/fastdds/rtps/common/Types.hpp:
 
 /usr/include/c++/9/bits/concept_check.h:
-
-/usr/include/c++/9/bits/allocated_ptr.h:
 
 /usr/local/include/fastdds/rtps/common/EntityId_t.hpp:
 
@@ -1108,8 +1104,6 @@ CMakeFiles/obstacle_process.dir/src/obstacle_process.cpp.o: /home/mazenatta/Desk
 /usr/include/sched.h:
 
 /usr/include/c++/9/bits/locale_facets_nonio.tcc:
-
-/home/mazenatta/Desktop/Master/ARP/drone_simulator/DDS/src/Generated/Targets.hpp:
 
 /usr/include/c++/9/bits/nested_exception.h:
 

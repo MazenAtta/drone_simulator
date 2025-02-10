@@ -84,7 +84,7 @@ CMakeFiles/target_process.dir/src/target_process.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/statx-generic.h \
  /usr/include/x86_64-linux-gnu/bits/types/struct_statx_timestamp.h \
  /usr/include/x86_64-linux-gnu/bits/types/struct_statx.h \
- /home/mazenatta/Desktop/Master/ARP/drone_simulator/src/../DDS/src/CustomPublisher.hpp \
+ /home/mazenatta/Desktop/Master/ARP/drone_simulator/src/../DDS/src/TargetsPublisher.hpp \
  /home/mazenatta/Desktop/Master/ARP/drone_simulator/src/../DDS/src/Generated/TargetsPubSubTypes.hpp \
  /usr/local/include/fastdds/dds/core/policy/QosPolicies.hpp \
  /usr/include/c++/9/bitset /usr/include/c++/9/string \
@@ -322,8 +322,6 @@ CMakeFiles/target_process.dir/src/target_process.cpp.o: \
  /usr/local/include/fastcdr/CdrSizeCalculator.hpp \
  /usr/local/include/fastdds/utils/md5.hpp \
  /home/mazenatta/Desktop/Master/ARP/drone_simulator/src/../DDS/src/Generated/Targets.hpp \
- /home/mazenatta/Desktop/Master/ARP/drone_simulator/src/../DDS/src/Generated/ObstaclesPubSubTypes.hpp \
- /home/mazenatta/Desktop/Master/ARP/drone_simulator/src/../DDS/src/Generated/Obstacles.hpp \
  /usr/include/c++/9/thread \
  /usr/local/include/fastdds/dds/domain/DomainParticipant.hpp \
  /usr/local/include/fastdds/dds/builtin/topic/ParticipantBuiltinTopicData.hpp \

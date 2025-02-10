@@ -1,2 +1,2 @@
-/usr/bin/ar qc libblackboard_handler.a CMakeFiles/blackboard_handler.dir/src/blackboard_handler.c.o
+/usr/bin/ar qc libblackboard_handler.a CMakeFiles/blackboard_handler.dir/src/blackboard_handler.cpp.o
 /usr/bin/ranlib libblackboard_handler.a

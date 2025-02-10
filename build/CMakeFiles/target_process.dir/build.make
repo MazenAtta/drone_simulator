@@ -72,32 +72,41 @@ include CMakeFiles/target_process.dir/flags.make
 CMakeFiles/target_process.dir/codegen:
 .PHONY : CMakeFiles/target_process.dir/codegen
 
-CMakeFiles/target_process.dir/src/target_process.c.o: CMakeFiles/target_process.dir/flags.make
-CMakeFiles/target_process.dir/src/target_process.c.o: /home/mazenatta/Desktop/Master/ARP/drone_simulator/src/target_process.c
-CMakeFiles/target_process.dir/src/target_process.c.o: CMakeFiles/target_process.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/mazenatta/Desktop/Master/ARP/drone_simulator/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/target_process.dir/src/target_process.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/target_process.dir/src/target_process.c.o -MF CMakeFiles/target_process.dir/src/target_process.c.o.d -o CMakeFiles/target_process.dir/src/target_process.c.o -c /home/mazenatta/Desktop/Master/ARP/drone_simulator/src/target_process.c
+CMakeFiles/target_process.dir/src/target_process.cpp.o: CMakeFiles/target_process.dir/flags.make
+CMakeFiles/target_process.dir/src/target_process.cpp.o: /home/mazenatta/Desktop/Master/ARP/drone_simulator/src/target_process.cpp
+CMakeFiles/target_process.dir/src/target_process.cpp.o: CMakeFiles/target_process.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/mazenatta/Desktop/Master/ARP/drone_simulator/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/target_process.dir/src/target_process.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/target_process.dir/src/target_process.cpp.o -MF CMakeFiles/target_process.dir/src/target_process.cpp.o.d -o CMakeFiles/target_process.dir/src/target_process.cpp.o -c /home/mazenatta/Desktop/Master/ARP/drone_simulator/src/target_process.cpp
 
-CMakeFiles/target_process.dir/src/target_process.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/target_process.dir/src/target_process.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mazenatta/Desktop/Master/ARP/drone_simulator/src/target_process.c > CMakeFiles/target_process.dir/src/target_process.c.i
+CMakeFiles/target_process.dir/src/target_process.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/target_process.dir/src/target_process.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/mazenatta/Desktop/Master/ARP/drone_simulator/src/target_process.cpp > CMakeFiles/target_process.dir/src/target_process.cpp.i
 
-CMakeFiles/target_process.dir/src/target_process.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/target_process.dir/src/target_process.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mazenatta/Desktop/Master/ARP/drone_simulator/src/target_process.c -o CMakeFiles/target_process.dir/src/target_process.c.s
+CMakeFiles/target_process.dir/src/target_process.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/target_process.dir/src/target_process.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/mazenatta/Desktop/Master/ARP/drone_simulator/src/target_process.cpp -o CMakeFiles/target_process.dir/src/target_process.cpp.s
 
 # Object files for target target_process
 target_process_OBJECTS = \
-"CMakeFiles/target_process.dir/src/target_process.c.o"
+"CMakeFiles/target_process.dir/src/target_process.cpp.o"
 
 # External object files for target target_process
 target_process_EXTERNAL_OBJECTS =
 
-target_process: CMakeFiles/target_process.dir/src/target_process.c.o
+target_process: CMakeFiles/target_process.dir/src/target_process.cpp.o
 target_process: CMakeFiles/target_process.dir/build.make
 target_process: libtarget_handler.a
+target_process: /usr/local/lib/libfastdds.a
+target_process: /usr/local/lib/libfastcdr.a
+target_process: libTargetsPubSubTypes.a
+target_process: libObstaclesPubSubTypes.a
+target_process: /opt/ros/foxy/lib/libfoonathan_memory-0.7.1.a
+target_process: /usr/lib/x86_64-linux-gnu/libtinyxml2.so
+target_process: /usr/lib/x86_64-linux-gnu/libtinyxml2.so
+target_process: /usr/lib/x86_64-linux-gnu/libssl.so
+target_process: /usr/lib/x86_64-linux-gnu/libcrypto.so
 target_process: CMakeFiles/target_process.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/mazenatta/Desktop/Master/ARP/drone_simulator/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking C executable target_process"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/mazenatta/Desktop/Master/ARP/drone_simulator/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable target_process"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/target_process.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

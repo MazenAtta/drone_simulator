@@ -72,32 +72,32 @@ include CMakeFiles/blackboard_process.dir/flags.make
 CMakeFiles/blackboard_process.dir/codegen:
 .PHONY : CMakeFiles/blackboard_process.dir/codegen
 
-CMakeFiles/blackboard_process.dir/src/blackboard_process.c.o: CMakeFiles/blackboard_process.dir/flags.make
-CMakeFiles/blackboard_process.dir/src/blackboard_process.c.o: /home/mazenatta/Desktop/Master/ARP/drone_simulator/src/blackboard_process.c
-CMakeFiles/blackboard_process.dir/src/blackboard_process.c.o: CMakeFiles/blackboard_process.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/mazenatta/Desktop/Master/ARP/drone_simulator/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/blackboard_process.dir/src/blackboard_process.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/blackboard_process.dir/src/blackboard_process.c.o -MF CMakeFiles/blackboard_process.dir/src/blackboard_process.c.o.d -o CMakeFiles/blackboard_process.dir/src/blackboard_process.c.o -c /home/mazenatta/Desktop/Master/ARP/drone_simulator/src/blackboard_process.c
+CMakeFiles/blackboard_process.dir/src/blackboard_process.cpp.o: CMakeFiles/blackboard_process.dir/flags.make
+CMakeFiles/blackboard_process.dir/src/blackboard_process.cpp.o: /home/mazenatta/Desktop/Master/ARP/drone_simulator/src/blackboard_process.cpp
+CMakeFiles/blackboard_process.dir/src/blackboard_process.cpp.o: CMakeFiles/blackboard_process.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/mazenatta/Desktop/Master/ARP/drone_simulator/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/blackboard_process.dir/src/blackboard_process.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/blackboard_process.dir/src/blackboard_process.cpp.o -MF CMakeFiles/blackboard_process.dir/src/blackboard_process.cpp.o.d -o CMakeFiles/blackboard_process.dir/src/blackboard_process.cpp.o -c /home/mazenatta/Desktop/Master/ARP/drone_simulator/src/blackboard_process.cpp
 
-CMakeFiles/blackboard_process.dir/src/blackboard_process.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/blackboard_process.dir/src/blackboard_process.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mazenatta/Desktop/Master/ARP/drone_simulator/src/blackboard_process.c > CMakeFiles/blackboard_process.dir/src/blackboard_process.c.i
+CMakeFiles/blackboard_process.dir/src/blackboard_process.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/blackboard_process.dir/src/blackboard_process.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/mazenatta/Desktop/Master/ARP/drone_simulator/src/blackboard_process.cpp > CMakeFiles/blackboard_process.dir/src/blackboard_process.cpp.i
 
-CMakeFiles/blackboard_process.dir/src/blackboard_process.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/blackboard_process.dir/src/blackboard_process.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mazenatta/Desktop/Master/ARP/drone_simulator/src/blackboard_process.c -o CMakeFiles/blackboard_process.dir/src/blackboard_process.c.s
+CMakeFiles/blackboard_process.dir/src/blackboard_process.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/blackboard_process.dir/src/blackboard_process.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/mazenatta/Desktop/Master/ARP/drone_simulator/src/blackboard_process.cpp -o CMakeFiles/blackboard_process.dir/src/blackboard_process.cpp.s
 
 # Object files for target blackboard_process
 blackboard_process_OBJECTS = \
-"CMakeFiles/blackboard_process.dir/src/blackboard_process.c.o"
+"CMakeFiles/blackboard_process.dir/src/blackboard_process.cpp.o"
 
 # External object files for target blackboard_process
 blackboard_process_EXTERNAL_OBJECTS =
 
-blackboard_process: CMakeFiles/blackboard_process.dir/src/blackboard_process.c.o
+blackboard_process: CMakeFiles/blackboard_process.dir/src/blackboard_process.cpp.o
 blackboard_process: CMakeFiles/blackboard_process.dir/build.make
 blackboard_process: libblackboard_handler.a
 blackboard_process: CMakeFiles/blackboard_process.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/mazenatta/Desktop/Master/ARP/drone_simulator/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking C executable blackboard_process"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/mazenatta/Desktop/Master/ARP/drone_simulator/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable blackboard_process"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/blackboard_process.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

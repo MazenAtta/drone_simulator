@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/mazenatta/Desktop/Master/ARP/drone_simulator/src/obstacle_process.c" "CMakeFiles/obstacle_process.dir/src/obstacle_process.c.o" "gcc" "CMakeFiles/obstacle_process.dir/src/obstacle_process.c.o.d"
+  "/home/mazenatta/Desktop/Master/ARP/drone_simulator/src/obstacle_process.cpp" "CMakeFiles/obstacle_process.dir/src/obstacle_process.cpp.o" "gcc" "CMakeFiles/obstacle_process.dir/src/obstacle_process.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

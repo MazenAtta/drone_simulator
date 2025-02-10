@@ -72,31 +72,31 @@ include CMakeFiles/obstacle_handler.dir/flags.make
 CMakeFiles/obstacle_handler.dir/codegen:
 .PHONY : CMakeFiles/obstacle_handler.dir/codegen
 
-CMakeFiles/obstacle_handler.dir/src/obstacle_handler.c.o: CMakeFiles/obstacle_handler.dir/flags.make
-CMakeFiles/obstacle_handler.dir/src/obstacle_handler.c.o: /home/mazenatta/Desktop/Master/ARP/drone_simulator/src/obstacle_handler.c
-CMakeFiles/obstacle_handler.dir/src/obstacle_handler.c.o: CMakeFiles/obstacle_handler.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/mazenatta/Desktop/Master/ARP/drone_simulator/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/obstacle_handler.dir/src/obstacle_handler.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/obstacle_handler.dir/src/obstacle_handler.c.o -MF CMakeFiles/obstacle_handler.dir/src/obstacle_handler.c.o.d -o CMakeFiles/obstacle_handler.dir/src/obstacle_handler.c.o -c /home/mazenatta/Desktop/Master/ARP/drone_simulator/src/obstacle_handler.c
+CMakeFiles/obstacle_handler.dir/src/obstacle_handler.cpp.o: CMakeFiles/obstacle_handler.dir/flags.make
+CMakeFiles/obstacle_handler.dir/src/obstacle_handler.cpp.o: /home/mazenatta/Desktop/Master/ARP/drone_simulator/src/obstacle_handler.cpp
+CMakeFiles/obstacle_handler.dir/src/obstacle_handler.cpp.o: CMakeFiles/obstacle_handler.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/mazenatta/Desktop/Master/ARP/drone_simulator/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/obstacle_handler.dir/src/obstacle_handler.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/obstacle_handler.dir/src/obstacle_handler.cpp.o -MF CMakeFiles/obstacle_handler.dir/src/obstacle_handler.cpp.o.d -o CMakeFiles/obstacle_handler.dir/src/obstacle_handler.cpp.o -c /home/mazenatta/Desktop/Master/ARP/drone_simulator/src/obstacle_handler.cpp
 
-CMakeFiles/obstacle_handler.dir/src/obstacle_handler.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/obstacle_handler.dir/src/obstacle_handler.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mazenatta/Desktop/Master/ARP/drone_simulator/src/obstacle_handler.c > CMakeFiles/obstacle_handler.dir/src/obstacle_handler.c.i
+CMakeFiles/obstacle_handler.dir/src/obstacle_handler.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/obstacle_handler.dir/src/obstacle_handler.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/mazenatta/Desktop/Master/ARP/drone_simulator/src/obstacle_handler.cpp > CMakeFiles/obstacle_handler.dir/src/obstacle_handler.cpp.i
 
-CMakeFiles/obstacle_handler.dir/src/obstacle_handler.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/obstacle_handler.dir/src/obstacle_handler.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mazenatta/Desktop/Master/ARP/drone_simulator/src/obstacle_handler.c -o CMakeFiles/obstacle_handler.dir/src/obstacle_handler.c.s
+CMakeFiles/obstacle_handler.dir/src/obstacle_handler.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/obstacle_handler.dir/src/obstacle_handler.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/mazenatta/Desktop/Master/ARP/drone_simulator/src/obstacle_handler.cpp -o CMakeFiles/obstacle_handler.dir/src/obstacle_handler.cpp.s
 
 # Object files for target obstacle_handler
 obstacle_handler_OBJECTS = \
-"CMakeFiles/obstacle_handler.dir/src/obstacle_handler.c.o"
+"CMakeFiles/obstacle_handler.dir/src/obstacle_handler.cpp.o"
 
 # External object files for target obstacle_handler
 obstacle_handler_EXTERNAL_OBJECTS =
 
-libobstacle_handler.a: CMakeFiles/obstacle_handler.dir/src/obstacle_handler.c.o
+libobstacle_handler.a: CMakeFiles/obstacle_handler.dir/src/obstacle_handler.cpp.o
 libobstacle_handler.a: CMakeFiles/obstacle_handler.dir/build.make
 libobstacle_handler.a: CMakeFiles/obstacle_handler.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/mazenatta/Desktop/Master/ARP/drone_simulator/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking C static library libobstacle_handler.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/mazenatta/Desktop/Master/ARP/drone_simulator/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX static library libobstacle_handler.a"
 	$(CMAKE_COMMAND) -P CMakeFiles/obstacle_handler.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/obstacle_handler.dir/link.txt --verbose=$(VERBOSE)
 

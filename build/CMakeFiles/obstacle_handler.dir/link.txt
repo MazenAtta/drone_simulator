@@ -1,2 +1,2 @@
-/usr/bin/ar qc libobstacle_handler.a CMakeFiles/obstacle_handler.dir/src/obstacle_handler.c.o
+/usr/bin/ar qc libobstacle_handler.a CMakeFiles/obstacle_handler.dir/src/obstacle_handler.cpp.o
 /usr/bin/ranlib libobstacle_handler.a

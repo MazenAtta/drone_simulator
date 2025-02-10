@@ -72,32 +72,32 @@ include CMakeFiles/input_window_process.dir/flags.make
 CMakeFiles/input_window_process.dir/codegen:
 .PHONY : CMakeFiles/input_window_process.dir/codegen
 
-CMakeFiles/input_window_process.dir/src/input_window_process.c.o: CMakeFiles/input_window_process.dir/flags.make
-CMakeFiles/input_window_process.dir/src/input_window_process.c.o: /home/mazenatta/Desktop/Master/ARP/drone_simulator/src/input_window_process.c
-CMakeFiles/input_window_process.dir/src/input_window_process.c.o: CMakeFiles/input_window_process.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/mazenatta/Desktop/Master/ARP/drone_simulator/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/input_window_process.dir/src/input_window_process.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/input_window_process.dir/src/input_window_process.c.o -MF CMakeFiles/input_window_process.dir/src/input_window_process.c.o.d -o CMakeFiles/input_window_process.dir/src/input_window_process.c.o -c /home/mazenatta/Desktop/Master/ARP/drone_simulator/src/input_window_process.c
+CMakeFiles/input_window_process.dir/src/input_window_process.cpp.o: CMakeFiles/input_window_process.dir/flags.make
+CMakeFiles/input_window_process.dir/src/input_window_process.cpp.o: /home/mazenatta/Desktop/Master/ARP/drone_simulator/src/input_window_process.cpp
+CMakeFiles/input_window_process.dir/src/input_window_process.cpp.o: CMakeFiles/input_window_process.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/mazenatta/Desktop/Master/ARP/drone_simulator/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/input_window_process.dir/src/input_window_process.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/input_window_process.dir/src/input_window_process.cpp.o -MF CMakeFiles/input_window_process.dir/src/input_window_process.cpp.o.d -o CMakeFiles/input_window_process.dir/src/input_window_process.cpp.o -c /home/mazenatta/Desktop/Master/ARP/drone_simulator/src/input_window_process.cpp
 
-CMakeFiles/input_window_process.dir/src/input_window_process.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/input_window_process.dir/src/input_window_process.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mazenatta/Desktop/Master/ARP/drone_simulator/src/input_window_process.c > CMakeFiles/input_window_process.dir/src/input_window_process.c.i
+CMakeFiles/input_window_process.dir/src/input_window_process.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/input_window_process.dir/src/input_window_process.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/mazenatta/Desktop/Master/ARP/drone_simulator/src/input_window_process.cpp > CMakeFiles/input_window_process.dir/src/input_window_process.cpp.i
 
-CMakeFiles/input_window_process.dir/src/input_window_process.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/input_window_process.dir/src/input_window_process.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mazenatta/Desktop/Master/ARP/drone_simulator/src/input_window_process.c -o CMakeFiles/input_window_process.dir/src/input_window_process.c.s
+CMakeFiles/input_window_process.dir/src/input_window_process.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/input_window_process.dir/src/input_window_process.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/mazenatta/Desktop/Master/ARP/drone_simulator/src/input_window_process.cpp -o CMakeFiles/input_window_process.dir/src/input_window_process.cpp.s
 
 # Object files for target input_window_process
 input_window_process_OBJECTS = \
-"CMakeFiles/input_window_process.dir/src/input_window_process.c.o"
+"CMakeFiles/input_window_process.dir/src/input_window_process.cpp.o"
 
 # External object files for target input_window_process
 input_window_process_EXTERNAL_OBJECTS =
 
-input_window_process: CMakeFiles/input_window_process.dir/src/input_window_process.c.o
+input_window_process: CMakeFiles/input_window_process.dir/src/input_window_process.cpp.o
 input_window_process: CMakeFiles/input_window_process.dir/build.make
 input_window_process: libinput_window_handler.a
 input_window_process: CMakeFiles/input_window_process.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/mazenatta/Desktop/Master/ARP/drone_simulator/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking C executable input_window_process"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/mazenatta/Desktop/Master/ARP/drone_simulator/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable input_window_process"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/input_window_process.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

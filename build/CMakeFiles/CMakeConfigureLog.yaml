@@ -568,3 +568,40 @@ events:
       Running the CXX compiler's linker: "/usr/bin/ld" "-v"
       GNU ld (GNU Binutils for Ubuntu) 2.34
 ...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/local/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "/usr/local/share/cmake-3.31/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "/usr/local/share/cmake-3.31/Modules/CheckCXXCompilerFlag.cmake:55 (cmake_check_compiler_flag)"
+      - "CMakeLists.txt:20 (check_cxx_compiler_flag)"
+    checks:
+      - "Performing Test SUPPORTS_CXX11"
+    directories:
+      source: "/home/mazenatta/Desktop/Master/ARP/drone_simulator/build/CMakeFiles/CMakeScratch/TryCompile-NfLjzN"
+      binary: "/home/mazenatta/Desktop/Master/ARP/drone_simulator/build/CMakeFiles/CMakeScratch/TryCompile-NfLjzN"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "SUPPORTS_CXX11"
+      cached: true
+      stdout: |
+        Change Dir: '/home/mazenatta/Desktop/Master/ARP/drone_simulator/build/CMakeFiles/CMakeScratch/TryCompile-NfLjzN'
+        
+        Run Build Command(s): /usr/local/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_3c8ca/fast
+        /usr/bin/make  -f CMakeFiles/cmTC_3c8ca.dir/build.make CMakeFiles/cmTC_3c8ca.dir/build
+        make[1]: Entering directory '/home/mazenatta/Desktop/Master/ARP/drone_simulator/build/CMakeFiles/CMakeScratch/TryCompile-NfLjzN'
+        Building CXX object CMakeFiles/cmTC_3c8ca.dir/src.cxx.o
+        /usr/bin/c++ -DSUPPORTS_CXX11  -std=gnu++11   -std=c++11 -o CMakeFiles/cmTC_3c8ca.dir/src.cxx.o -c /home/mazenatta/Desktop/Master/ARP/drone_simulator/build/CMakeFiles/CMakeScratch/TryCompile-NfLjzN/src.cxx
+        Linking CXX executable cmTC_3c8ca
+        /usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_3c8ca.dir/link.txt --verbose=1
+        /usr/bin/c++ CMakeFiles/cmTC_3c8ca.dir/src.cxx.o -o cmTC_3c8ca
+        make[1]: Leaving directory '/home/mazenatta/Desktop/Master/ARP/drone_simulator/build/CMakeFiles/CMakeScratch/TryCompile-NfLjzN'
+        
+      exitCode: 0
+...

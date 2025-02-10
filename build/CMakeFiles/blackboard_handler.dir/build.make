@@ -72,31 +72,31 @@ include CMakeFiles/blackboard_handler.dir/flags.make
 CMakeFiles/blackboard_handler.dir/codegen:
 .PHONY : CMakeFiles/blackboard_handler.dir/codegen
 
-CMakeFiles/blackboard_handler.dir/src/blackboard_handler.c.o: CMakeFiles/blackboard_handler.dir/flags.make
-CMakeFiles/blackboard_handler.dir/src/blackboard_handler.c.o: /home/mazenatta/Desktop/Master/ARP/drone_simulator/src/blackboard_handler.c
-CMakeFiles/blackboard_handler.dir/src/blackboard_handler.c.o: CMakeFiles/blackboard_handler.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/mazenatta/Desktop/Master/ARP/drone_simulator/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/blackboard_handler.dir/src/blackboard_handler.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/blackboard_handler.dir/src/blackboard_handler.c.o -MF CMakeFiles/blackboard_handler.dir/src/blackboard_handler.c.o.d -o CMakeFiles/blackboard_handler.dir/src/blackboard_handler.c.o -c /home/mazenatta/Desktop/Master/ARP/drone_simulator/src/blackboard_handler.c
+CMakeFiles/blackboard_handler.dir/src/blackboard_handler.cpp.o: CMakeFiles/blackboard_handler.dir/flags.make
+CMakeFiles/blackboard_handler.dir/src/blackboard_handler.cpp.o: /home/mazenatta/Desktop/Master/ARP/drone_simulator/src/blackboard_handler.cpp
+CMakeFiles/blackboard_handler.dir/src/blackboard_handler.cpp.o: CMakeFiles/blackboard_handler.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/mazenatta/Desktop/Master/ARP/drone_simulator/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/blackboard_handler.dir/src/blackboard_handler.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/blackboard_handler.dir/src/blackboard_handler.cpp.o -MF CMakeFiles/blackboard_handler.dir/src/blackboard_handler.cpp.o.d -o CMakeFiles/blackboard_handler.dir/src/blackboard_handler.cpp.o -c /home/mazenatta/Desktop/Master/ARP/drone_simulator/src/blackboard_handler.cpp
 
-CMakeFiles/blackboard_handler.dir/src/blackboard_handler.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/blackboard_handler.dir/src/blackboard_handler.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mazenatta/Desktop/Master/ARP/drone_simulator/src/blackboard_handler.c > CMakeFiles/blackboard_handler.dir/src/blackboard_handler.c.i
+CMakeFiles/blackboard_handler.dir/src/blackboard_handler.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/blackboard_handler.dir/src/blackboard_handler.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/mazenatta/Desktop/Master/ARP/drone_simulator/src/blackboard_handler.cpp > CMakeFiles/blackboard_handler.dir/src/blackboard_handler.cpp.i
 
-CMakeFiles/blackboard_handler.dir/src/blackboard_handler.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/blackboard_handler.dir/src/blackboard_handler.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mazenatta/Desktop/Master/ARP/drone_simulator/src/blackboard_handler.c -o CMakeFiles/blackboard_handler.dir/src/blackboard_handler.c.s
+CMakeFiles/blackboard_handler.dir/src/blackboard_handler.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/blackboard_handler.dir/src/blackboard_handler.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/mazenatta/Desktop/Master/ARP/drone_simulator/src/blackboard_handler.cpp -o CMakeFiles/blackboard_handler.dir/src/blackboard_handler.cpp.s
 
 # Object files for target blackboard_handler
 blackboard_handler_OBJECTS = \
-"CMakeFiles/blackboard_handler.dir/src/blackboard_handler.c.o"
+"CMakeFiles/blackboard_handler.dir/src/blackboard_handler.cpp.o"
 
 # External object files for target blackboard_handler
 blackboard_handler_EXTERNAL_OBJECTS =
 
-libblackboard_handler.a: CMakeFiles/blackboard_handler.dir/src/blackboard_handler.c.o
+libblackboard_handler.a: CMakeFiles/blackboard_handler.dir/src/blackboard_handler.cpp.o
 libblackboard_handler.a: CMakeFiles/blackboard_handler.dir/build.make
 libblackboard_handler.a: CMakeFiles/blackboard_handler.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/mazenatta/Desktop/Master/ARP/drone_simulator/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking C static library libblackboard_handler.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/mazenatta/Desktop/Master/ARP/drone_simulator/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX static library libblackboard_handler.a"
 	$(CMAKE_COMMAND) -P CMakeFiles/blackboard_handler.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/blackboard_handler.dir/link.txt --verbose=$(VERBOSE)
 

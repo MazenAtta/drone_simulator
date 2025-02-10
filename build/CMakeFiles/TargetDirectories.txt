@@ -12,5 +12,7 @@
 /home/mazenatta/Desktop/Master/ARP/drone_simulator/build/CMakeFiles/obstacle_handler.dir
 /home/mazenatta/Desktop/Master/ARP/drone_simulator/build/CMakeFiles/target_handler.dir
 /home/mazenatta/Desktop/Master/ARP/drone_simulator/build/CMakeFiles/watchdog_handler.dir
+/home/mazenatta/Desktop/Master/ARP/drone_simulator/build/CMakeFiles/TargetsPubSubTypes.dir
+/home/mazenatta/Desktop/Master/ARP/drone_simulator/build/CMakeFiles/ObstaclesPubSubTypes.dir
 /home/mazenatta/Desktop/Master/ARP/drone_simulator/build/CMakeFiles/edit_cache.dir
 /home/mazenatta/Desktop/Master/ARP/drone_simulator/build/CMakeFiles/rebuild_cache.dir

@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/mazenatta/Desktop/Master/ARP/drone_simulator/src/watchdog_handler.c" "CMakeFiles/watchdog_handler.dir/src/watchdog_handler.c.o" "gcc" "CMakeFiles/watchdog_handler.dir/src/watchdog_handler.c.o.d"
+  "/home/mazenatta/Desktop/Master/ARP/drone_simulator/src/watchdog_handler.cpp" "CMakeFiles/watchdog_handler.dir/src/watchdog_handler.cpp.o" "gcc" "CMakeFiles/watchdog_handler.dir/src/watchdog_handler.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

@@ -32,7 +32,7 @@ The architecture consists of the following processes:
 ## Primitives and Algorithms Used
 
 - **IPC Primitives**: Named pipes (mkfifo, open, read, write) are used for inter-process communication.
-- **Signal Handling***: Signals (SIGCONT, SIGSTOP, SIGTERM) are used to control process states.
+- **Signal Handling**: Signals (SIGCONT, SIGSTOP, SIGTERM) are used to control process states.
 - **Algorithms**: Basic game state management algorithms for collision detection, obstacle generation, and target placement.
 
 ### Detailed Architecture Description
@@ -160,24 +160,24 @@ The output window shows:
 
 ## Project Structure
     ```sh
-   drone_simulator/
-   ├── src/
-   │   ├── blackboard_process.c
-   │   ├── server_process.c
-   │   ├── input_window_process.c
-   │   ├── output_window_process.c
-   │   ├── obstacle_process.c
-   │   ├── target_process.c
-   │   └── watchdog_process.c
-   ├── config/
-   │   └── config.yaml
-   ├── log/
-   ├── Makefile
-   ├── README.md
-   └── graphs/
-      ├── architecture.PNG
-      ├── Inputwindow.png
-      └── Outputwindow.png
+    drone_simulator/
+    ├── src/
+    │   ├── blackboard_process.c
+    │   ├── server_process.c
+    │   ├── input_window_process.c
+    │   ├── output_window_process.c
+    │   ├── obstacle_process.c
+    │   ├── target_process.c
+    │   └── watchdog_process.c
+    ├── config/
+    │   └── config.yaml
+    ├── log/
+    ├── Makefile
+    ├── README.md
+    └── graphs/
+       ├── architecture.PNG
+       ├── Inputwindow.png
+       └── Outputwindow.png
     ```
 
 

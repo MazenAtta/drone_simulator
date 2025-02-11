@@ -17,7 +17,7 @@
 The `drone_simulator` project is a simple simulation of a drone environment involving multiple processes that communicate through named pipes. The project aims to demonstrate the usage of inter-process communication (IPC) techniques, signal handling, error management, and logging in a multi-process system.
 
 ## Architecture
-![Architecture Diagram](graphs/architecture.png)
+![Architecture Diagram](graphs/architecture.PNG)
 
 The architecture consists of the following processes:
 - **Blackboard Process**: Acts as the master process, managing the execution and signals.

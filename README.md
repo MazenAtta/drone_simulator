@@ -159,7 +159,7 @@ The output window shows:
 - **Description**: Monitors the system's health and ensures all processes are running as expected.
 
 ## Project Structure
-    ```sh
+    ```
     drone_simulator/
     ├── src/
     │   ├── blackboard_process.c
@@ -223,3 +223,5 @@ Debug messages and log entries are used to track the execution and state of the 
 
 ## Repository
 For more information, visit the [drone_simulator GitHub repository](https://github.com/MazenAtta/drone_simulator).
+
+

@@ -4,6 +4,7 @@
 - [Introduction](#introduction)
 - [Architecture](#architecture)
 - [Components](#components)
+- [Project Structure](#project-structure)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Configuration](#configuration)
@@ -27,6 +28,12 @@ The architecture consists of the following processes:
 - **Obstacle Process**: Generates and manages obstacles in the game.
 - **Target Process**: Generates and manages targets in the game.
 - **Watchdog Process**: Monitors the system and ensures all processes are running as expected.
+
+## Primitives and Algorithms Used
+
+- **IPC Primitives**: Named pipes (mkfifo, open, read, write) are used for inter-process communication.
+- **Signal Handling***: Signals (SIGCONT, SIGSTOP, SIGTERM) are used to control process states.
+- **Algorithms**: Basic game state management algorithms for collision detection, obstacle generation, and target placement.
 
 ### Detailed Architecture Description
 
@@ -150,6 +157,29 @@ The output window shows:
 ### Watchdog Process
 - **File**: `src/watchdog_process.c`
 - **Description**: Monitors the system's health and ensures all processes are running as expected.
+
+## Project Structure
+    ```sh
+   drone_simulator/
+   ├── src/
+   │   ├── blackboard_process.c
+   │   ├── server_process.c
+   │   ├── input_window_process.c
+   │   ├── output_window_process.c
+   │   ├── obstacle_process.c
+   │   ├── target_process.c
+   │   └── watchdog_process.c
+   ├── config/
+   │   └── config.yaml
+   ├── log/
+   ├── Makefile
+   ├── README.md
+   └── graphs/
+      ├── architecture.PNG
+      ├── Inputwindow.png
+      └── Outputwindow.png
+    ```
+
 
 ## Installation
 1. **Clone the Repository**:

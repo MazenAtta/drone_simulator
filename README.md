@@ -180,7 +180,6 @@ The output window shows:
        └── Outputwindow.png
     ```
 
-
 ## Installation
 1. **Clone the Repository**:
     ```sh

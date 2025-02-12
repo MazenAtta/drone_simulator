@@ -42,12 +42,12 @@ int main() {
     ssize_t bytes_read;
 
     fd_set read_fds;
-    int max_fd = (fds[2] > fds[9]) ? fds[2] : fds[9];
+    int max_fd = (fds[2] > fds[5]) ? fds[2] : fds[5];
 
     while (running) {
         FD_ZERO(&read_fds);
         FD_SET(fds[2], &read_fds); // input_signal
-        FD_SET(fds[9], &read_fds); // watchdog_signal
+        FD_SET(fds[5], &read_fds); // watchdog_signal
 
         int activity = select(max_fd + 1, &read_fds, NULL, NULL, NULL);
 
@@ -72,8 +72,8 @@ int main() {
             }
         }
 
-        if (FD_ISSET(fds[9], &read_fds)) {
-            bytes_read = read(fds[9], buffer, 1);
+        if (FD_ISSET(fds[5], &read_fds)) {
+            bytes_read = read(fds[5], buffer, 1);
             if (bytes_read > 0) {
                 handle_terminate();
             } else if (bytes_read == -1) {

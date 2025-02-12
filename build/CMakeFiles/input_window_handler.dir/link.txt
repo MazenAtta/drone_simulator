@@ -1,2 +1,0 @@
-/usr/bin/ar qc libinput_window_handler.a CMakeFiles/input_window_handler.dir/src/input_window_handler.cpp.o
-/usr/bin/ranlib libinput_window_handler.a

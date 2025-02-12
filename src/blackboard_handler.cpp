@@ -3,8 +3,7 @@
 // Pipe paths
 const char *pipes[NUM_PIPES] = {
     "/tmp/input_ask", "/tmp/input_receive", "/tmp/input_signal",
-    "/tmp/output_ask", "/tmp/output_receive", "/tmp/obstacle_ask",
-    "/tmp/obstacle_receive", "/tmp/target_ask", "/tmp/target_receive",
+    "/tmp/output_ask", "/tmp/output_receive",
     "/tmp/watchdog_signal"
 };
 

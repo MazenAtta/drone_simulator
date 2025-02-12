@@ -1,2 +1,0 @@
-/usr/bin/ar qc libwatchdog_handler.a CMakeFiles/watchdog_handler.dir/src/watchdog_handler.cpp.o
-/usr/bin/ranlib libwatchdog_handler.a

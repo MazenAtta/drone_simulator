@@ -14,7 +14,7 @@
 
 // Constants
 #define NUM_PROCESSES 4
-#define NUM_PIPES 10
+#define NUM_PIPES 6
 
 // Pipe paths
 extern const char *pipes[NUM_PIPES];

@@ -82,7 +82,11 @@ private:
             if (reader->take_next_sample(&my_message_, &info) == eprosima::fastdds::dds::RETCODE_OK)
             {
                 valid_data = my_message_;
-                flag = 1;
+                if(valid_data != invalid_data)
+                {
+                    read_flag = 1;
+                    invalid_data = valid_data;
+                }
             }
         }
 
@@ -91,7 +95,7 @@ private:
         Targets my_message_;
         Targets valid_data;
         Targets invalid_data;
-        std::atomic_int flag;
+        std::atomic_int read_flag;
 
         std::atomic_int samples_;
 
@@ -190,15 +194,9 @@ public:
 
     bool check_data_available()
     {
-        if (listener_.flag == 1)
+        if(listener_.read_flag == 1)
         {
-            if (listener_.valid_data != listener_.invalid_data)
-            {
-                listener_.invalid_data = listener_.valid_data;
-                listener_.flag = 0;
-                return true;
-            }
-            listener_.flag = 0;
+            return true;
         }
         return false;
     }
@@ -206,8 +204,8 @@ public:
     Targets get_last_data()
     {
         return listener_.valid_data;
+        listener_.read_flag = 0;
+
     }
-
-
 
 };

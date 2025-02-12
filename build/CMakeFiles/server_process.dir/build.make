@@ -96,10 +96,11 @@ server_process_EXTERNAL_OBJECTS =
 server_process: CMakeFiles/server_process.dir/src/server_process.cpp.o
 server_process: CMakeFiles/server_process.dir/build.make
 server_process: libserver_handler.a
-server_process: /usr/local/lib/libfastdds.a
 server_process: /usr/local/lib/libfastcdr.a
+server_process: /usr/local/lib/libfastdds.a
 server_process: libTargetsPubSubTypes.a
 server_process: libObstaclesPubSubTypes.a
+server_process: /usr/local/lib/libfastcdr.a
 server_process: /opt/ros/foxy/lib/libfoonathan_memory-0.7.1.a
 server_process: /usr/lib/x86_64-linux-gnu/libtinyxml2.so
 server_process: /usr/lib/x86_64-linux-gnu/libtinyxml2.so

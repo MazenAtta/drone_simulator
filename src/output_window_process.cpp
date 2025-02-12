@@ -6,7 +6,7 @@ int main() {
     const char *output_receive = "/tmp/output_receive";
     const char *log_folder = "log";
     const char *log_file = "log/output_window_log.txt";
-    const char *config_file = "../config/config.yaml";
+    const char *config_file = "config/config.yaml";
 
     // Create log folder with full permissions
     mkdir(log_folder, 0777);

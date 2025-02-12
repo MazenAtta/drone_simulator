@@ -30,7 +30,7 @@ int main() {
     Obstacle obstacles; // Structure to hold obstacle data
     Obstacles dds_obstacles; // DDS message type
     init_obstacles(&obstacles); // Initialize the obstacle structure
-
+    publisher->waitSub(); // Wait for the subscriber to connect
     time_t last_generation_time = 0; // Last time obstacles were generated
     time_t last_log_time = 0; // Last time execution was logged
     while (1) {

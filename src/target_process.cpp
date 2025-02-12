@@ -31,7 +31,7 @@ int main() {
     Target targets; // Structure to hold target data
     Targets dds_targets; // DDS message type
     init_targets(&targets); // Initialize the targets
-
+    publisher->waitSub(); // Wait for the subscriber to connect
     time_t last_generation_time = 0; // Last time targets were generated
     time_t last_log_time = 0; // Last time execution was logged
     while (1) {

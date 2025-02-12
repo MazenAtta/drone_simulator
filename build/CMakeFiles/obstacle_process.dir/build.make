@@ -96,10 +96,11 @@ obstacle_process_EXTERNAL_OBJECTS =
 obstacle_process: CMakeFiles/obstacle_process.dir/src/obstacle_process.cpp.o
 obstacle_process: CMakeFiles/obstacle_process.dir/build.make
 obstacle_process: libobstacle_handler.a
-obstacle_process: /usr/local/lib/libfastdds.a
 obstacle_process: /usr/local/lib/libfastcdr.a
+obstacle_process: /usr/local/lib/libfastdds.a
 obstacle_process: libTargetsPubSubTypes.a
 obstacle_process: libObstaclesPubSubTypes.a
+obstacle_process: /usr/local/lib/libfastcdr.a
 obstacle_process: /opt/ros/foxy/lib/libfoonathan_memory-0.7.1.a
 obstacle_process: /usr/lib/x86_64-linux-gnu/libtinyxml2.so
 obstacle_process: /usr/lib/x86_64-linux-gnu/libtinyxml2.so

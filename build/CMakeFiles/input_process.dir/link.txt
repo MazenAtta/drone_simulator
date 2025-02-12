@@ -1,1 +1,0 @@
-/usr/bin/cc CMakeFiles/input_process.dir/src/input_window_process.c.o -o input_process  -lcurses /usr/lib/x86_64-linux-gnu/libform.so libinput_window_handler.a -lcurses /usr/lib/x86_64-linux-gnu/libform.so -lncursesw

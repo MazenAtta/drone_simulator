@@ -96,10 +96,11 @@ watchdog_process_EXTERNAL_OBJECTS =
 watchdog_process: CMakeFiles/watchdog_process.dir/src/watchdog_process.cpp.o
 watchdog_process: CMakeFiles/watchdog_process.dir/build.make
 watchdog_process: libwatchdog_handler.a
-watchdog_process: /usr/local/lib/libfastdds.a
 watchdog_process: /usr/local/lib/libfastcdr.a
+watchdog_process: /usr/local/lib/libfastdds.a
 watchdog_process: libTargetsPubSubTypes.a
 watchdog_process: libObstaclesPubSubTypes.a
+watchdog_process: /usr/local/lib/libfastcdr.a
 watchdog_process: /opt/ros/foxy/lib/libfoonathan_memory-0.7.1.a
 watchdog_process: /usr/lib/x86_64-linux-gnu/libtinyxml2.so
 watchdog_process: /usr/lib/x86_64-linux-gnu/libtinyxml2.so

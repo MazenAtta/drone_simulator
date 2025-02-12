@@ -19,10 +19,10 @@ int main() {
 
     // Define the arguments for each process
     const char *process_args[NUM_PROCESSES][6] = {
-        {"./server_process", NULL, NULL, NULL, NULL, NULL},
-        {"konsole", "--geometry", "650x400", "-e", "./input_window_process", NULL},
-        {"konsole", "--geometry", "830x565", "-e", "./output_window_process", NULL},
-        {"./watchdog_process", NULL, NULL, NULL, NULL, NULL}
+        {"./build/server_process", NULL, NULL, NULL, NULL, NULL},
+        {"konsole", "--geometry", "650x400", "-e", "./build/input_window_process", NULL},
+        {"konsole", "--geometry", "830x565", "-e", "./build/output_window_process", NULL},
+        {"./build/watchdog_process", NULL, NULL, NULL, NULL, NULL}
     };
 
     // Spawn the processes using the process_args array

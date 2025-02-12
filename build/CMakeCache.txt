@@ -260,9 +260,6 @@ fastcdr_DIR:PATH=/usr/local/lib/cmake/fastcdr
 //The directory containing a CMake configuration file for fastdds.
 fastdds_DIR:PATH=/usr/local/share/fastdds/cmake
 
-//The directory containing a CMake configuration file for fastrtps.
-fastrtps_DIR:PATH=fastrtps_DIR-NOTFOUND
-
 //The directory containing a CMake configuration file for foonathan_memory.
 foonathan_memory_DIR:PATH=/opt/ros/foxy/lib/foonathan_memory/cmake
 

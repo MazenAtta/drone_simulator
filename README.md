@@ -171,7 +171,7 @@ The output window shows:
 - **Description**: Monitors the system's health and ensures all processes are running as expected.
 
 ## Project Structure
-    ```
+```
     drone_simulator/
     ├── src/
     │   ├── blackboard_process.c
@@ -190,7 +190,7 @@ The output window shows:
        ├── architecture.PNG
        ├── Inputwindow.png
        └── Outputwindow.png
-    ```
+```
 
 ## Installation
 1. **Clone the Repository**:

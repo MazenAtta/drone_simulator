@@ -2,6 +2,7 @@
 
 ## Table of Contents
 - [Introduction](#introduction)
+- [How To Play] (#how-to-play)
 - [Architecture](#architecture)
 - [Components](#components)
 - [Project Structure](#project-structure)
@@ -16,6 +17,17 @@
 
 ## Introduction
 The `drone_simulator` project is a simple simulation of a drone environment involving multiple processes that communicate through named pipes. The project aims to demonstrate the usage of inter-process communication (IPC) techniques, signal handling, error management, and logging in a multi-process system.
+
+## How To Play
+Once the game starts, you will be in a waiting state where the targets and obstacles change randomly every 10 seconds until the user begins the game by pressing the 'b' button. Once pressed, the game starts, and you can control the drone using:
+- `q`, `w`, `e`, `a`, `s`, `d`, `z`, `x`, `c` for controlling the drone.
+- `b` to begin the game.
+- `p` to pause or continue all processes.
+- `r` to reset all processes.
+- `k` to terminate all processes.
+
+Commands are stackable and continuous up to 5. Targets must be taken in order for a +10 score, while hitting obstacles incurs a -0.1 penalty per hit. Changing drone parameters (e.g., weight, viscosity) can be done live in `config/config.yaml`.
+
 
 ## Architecture
 ![Architecture Diagram](graphs/architecture.PNG)

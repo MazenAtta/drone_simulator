@@ -2,7 +2,7 @@
 
 ## Table of Contents
 - [Introduction](#introduction)
-- [How To Play] (#how-to-play)
+- [How To Play](#how-to-play)
 - [Architecture](#architecture)
 - [Components](#components)
 - [Project Structure](#project-structure)

@@ -113,6 +113,12 @@ private:
             case LOCATOR_KIND_SHM:
                 std::cout << "Using Shared Memory" << std::endl;
                 break;
+            case LOCATOR_KIND_TCPv4:
+                std::cout << "Using TCPv4" << std::endl;
+                break;
+            case LOCATOR_KIND_TCPv6:
+                std::cout << "Using TCPv6" << std::endl;
+                break;
             default:
                 std::cout << "Unknown Transport" << std::endl;
                 break;
@@ -153,6 +159,7 @@ public:
     {
         DomainParticipantQos participantQos;
         participantQos.name("Participant_subscriber");
+        participantQos.setup_transports(eprosima::fastdds::rtps::BuiltinTransports::LARGE_DATA);
 
 
         participant_ = DomainParticipantFactory::get_instance()->create_participant(1, participantQos);

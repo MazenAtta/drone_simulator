@@ -2,12 +2,12 @@
 
 ## Table of Contents
 - [Introduction](#introduction)
-- [Architecture](#architecture)
-- [Components](#components)
-- [Project Structure](#project-structure)
 - [Installation](#installation)
-- [Usage](#usage)
 - [Configuration](#configuration)
+- [Usage](#usage)
+- [Architecture](#architecture)
+- [Project Structure](#project-structure)
+- [Components](#components)
 - [Logging](#logging)
 - [Error Handling](#error-handling)
 - [Signal Handling](#signal-handling)
@@ -16,6 +16,40 @@
 
 ## Introduction
 The `drone_simulator` project is a distributed simulation of a drone environment involving multiple processes. It demonstrates inter-process communication (IPC) using **DDS (Data Distribution Service)**, signal handling, error management, and logging in a multi-process system split across two computers.
+
+## Installation
+1. **Clone the Repository**:
+   ```sh
+   git clone https://github.com/MazenAtta/drone_simulator.git
+   cd drone_simulator
+   ```
+
+2. **Build the Project(manually)**:
+   ```sh
+   mkdir build && cd build
+   cmake ..
+   make
+   ```
+3. **Build the Project(automatically)**:
+   ```sh
+   ./run.sh
+   ```
+
+## Configuration
+Modify settings in `config/config.yaml`. Defaults are used if missing.
+
+## Usage
+1. **Run the Main Application (Computer 1)**:
+   ```sh
+   ./run.sh
+   1
+   ```
+
+2. **Run the Target & Obstacle Generator (Computer 2)**:
+   ```sh
+   ./run.sh
+   2
+   ```
 
 ## Architecture
 ![Architecture Diagram](graphs/architecture.PNG)
@@ -40,6 +74,28 @@ The architecture consists of:
 ### Communication Model
 - **DDS (Data Distribution Service)** is used for communication between the Server (subscriber) and the Obstacle/Target processes (publishers).
 - **Signals (SIGCONT, SIGSTOP, SIGTERM)** are still used for local process management on main application computer.
+
+## Project Structure
+```
+drone_simulator/
+├── src/
+│   ├── blackboard_process.c
+│   ├── server_process.c
+│   ├── input_window_process.c
+│   ├── output_window_process.c
+│   ├── obstacle_process.cpp
+│   ├── target_process.cpp
+├── config/
+│   └── config.yaml
+├── CMakeLists.txt
+├── build/
+│   ├── log/
+│   └── run.sh
+└── graphs/
+   ├── architecture_dds.PNG
+   ├── Inputwindow.png
+   └── Outputwindow.png
+```
 
 ## Components
 ### Blackboard Process
@@ -66,61 +122,6 @@ The architecture consists of:
 - **File**: `src/target_process.cpp`
 - **Description**: Publishes target data to the DDS topic.
 
-## Project Structure
-```
-drone_simulator/
-├── src/
-│   ├── blackboard_process.c
-│   ├── server_process.c
-│   ├── input_window_process.c
-│   ├── output_window_process.c
-│   ├── obstacle_process.cpp
-│   ├── target_process.cpp
-├── config/
-│   └── config.yaml
-├── CMakeLists.txt
-├── build/
-│   ├── log/
-│   └── run.sh
-└── graphs/
-    ├── architecture_dds.PNG
-    ├── Inputwindow.png
-    └── Outputwindow.png
-```
-
-## Installation
-1. **Clone the Repository**:
-    ```sh
-    git clone https://github.com/MazenAtta/drone_simulator.git
-    cd drone_simulator
-    ```
-
-2. **Build the Project(manually)**:
-    ```sh
-    mkdir build && cd build
-    cmake ..
-    make
-    ```
-3. **Build the Project(automatically)**:
-    ```sh
-    ./run.sh
-    ```
-## Usage
-1. **Run the Main Application (Computer 1)**:
-    ```sh
-    ./run.sh
-    1
-    ```
-
-2. **Run the Target & Obstacle Generator (Computer 2)**:
-    ```sh
-    ./run.sh
-    2
-    ```
-
-## Configuration
-Modify settings in `config/config.yaml`. Defaults are used if missing.
-
 ## Logging
 Log files are stored in the `log` directory for debugging and error tracking.
 
@@ -138,4 +139,3 @@ Use log files in the `log` directory for diagnostics.
 
 ## Repository
 For more details, visit the [drone_simulator GitHub repository](https://github.com/MazenAtta/drone_simulator).
-

@@ -1,2 +1,0 @@
-/usr/bin/ar qc libtarget_handler.a CMakeFiles/target_handler.dir/src/target_handler.cpp.o
-/usr/bin/ranlib libtarget_handler.a

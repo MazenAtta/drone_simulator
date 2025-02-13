@@ -1,2 +1,0 @@
-/usr/bin/ar qc liboutput_window_handler.a CMakeFiles/output_window_handler.dir/src/output_window_handler.cpp.o
-/usr/bin/ranlib liboutput_window_handler.a

@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/input_window_process.dir/src/input_window_process.cpp.o -o input_window_process  libinput_window_handler.a -lncursesw -ltinfo

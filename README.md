@@ -95,13 +95,16 @@ drone_simulator/
     cd drone_simulator
     ```
 
-2. **Build the Project**:
+2. **Build the Project(manually)**:
     ```sh
     mkdir build && cd build
     cmake ..
     make
     ```
-
+3. **Build the Project(automatically)**:
+    ```sh
+    ./run.sh
+    ```
 ## Usage
 1. **Run the Main Application (Computer 1)**:
     ```sh

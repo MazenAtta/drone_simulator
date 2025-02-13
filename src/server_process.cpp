@@ -3,7 +3,7 @@
 #include "../DDS/src/TargetsSubscriber.hpp"
 
 
-void convert_from_dds_obstacles(const Obstacles& src, Obstacle& dest)
+void convert_from_dds_obstacles(Obstacles& src, Obstacle& dest)
 {
     for (int i = 0; i < MAX_OBSTACLES; ++i)
     {
@@ -12,7 +12,7 @@ void convert_from_dds_obstacles(const Obstacles& src, Obstacle& dest)
     }
 }
 
-void convert_from_dds_targets(const Targets& src, Target& dest)
+void convert_from_dds_targets(Targets& src, Target& dest)
 {
     for (int i = 0; i < MAX_TARGETS; ++i)
     {

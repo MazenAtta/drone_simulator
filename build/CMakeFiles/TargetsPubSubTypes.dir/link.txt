@@ -1,2 +1,0 @@
-/usr/bin/ar qc libTargetsPubSubTypes.a CMakeFiles/TargetsPubSubTypes.dir/DDS/src/Generated/ObstaclesPubSubTypes.cxx.o CMakeFiles/TargetsPubSubTypes.dir/DDS/src/Generated/ObstaclesTypeObjectSupport.cxx.o CMakeFiles/TargetsPubSubTypes.dir/DDS/src/Generated/TargetsPubSubTypes.cxx.o CMakeFiles/TargetsPubSubTypes.dir/DDS/src/Generated/TargetsTypeObjectSupport.cxx.o
-/usr/bin/ranlib libTargetsPubSubTypes.a

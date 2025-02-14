@@ -79,7 +79,7 @@ Modify settings in `config/config.yaml`. Defaults are used if missing.
    ```
 
 ## Architecture
-![Architecture Diagram](graphs/Slide3.PNG.PNG)
+![Architecture Diagram](graphs/Slide3.PNG)
 ![DDS Diagram](graphs/Slide4.PNG)
 
 The architecture consists of:

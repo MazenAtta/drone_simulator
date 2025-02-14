@@ -80,27 +80,6 @@ private:
         private:
         void print_transport_protocol(const eprosima::fastdds::rtps::Locator &locator)
         {
-            switch (locator.kind)
-            {
-            case LOCATOR_KIND_UDPv4:
-                std::cout << "Using UDPv4" << std::endl;
-                break;
-            case LOCATOR_KIND_UDPv6:
-                std::cout << "Using UDPv6" << std::endl;
-                break;
-            case LOCATOR_KIND_SHM:
-                std::cout << "Using Shared Memory" << std::endl;
-                break;
-            case LOCATOR_KIND_TCPv4:
-                std::cout << "Using TCPv4" << std::endl;
-                break;
-            case LOCATOR_KIND_TCPv6:
-                std::cout << "Using TCPv6" << std::endl;
-                break;
-            default:
-                std::cout << "Unknown Transport" << std::endl;
-                break;
-            }
         }
 
     } listener_;

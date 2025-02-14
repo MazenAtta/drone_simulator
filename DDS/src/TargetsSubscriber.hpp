@@ -111,7 +111,6 @@ private:
                 std::cout << "Using UDPv6" << std::endl;
                 break;
             case LOCATOR_KIND_SHM:
-                std::cout << "Using Shared Memory" << std::endl;
                 break;
             case LOCATOR_KIND_TCPv4:
                 std::cout << "Using TCPv4" << std::endl;

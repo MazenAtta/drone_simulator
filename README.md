@@ -1,7 +1,9 @@
 # Drone Simulator (DDS-Based)
 
 ## Table of Contents
+- [Project Demo](#project-demo)
 - [Introduction](#introduction)
+- [Dependencies](#dependencies)
 - [Installation](#installation)
 - [Configuration](#configuration)
 - [Usage](#usage)
@@ -14,8 +16,27 @@
 - [Debugging](#debugging)
 - [Repository](#repository)
 
+## Project Demo
+
+[![One Computer])](https://drive.google.com/file/d/1EBTtN-gIMC3GMbld8eKrcUvEuC2V4qEU/view?usp=drive_link)
+[![Two Computers 1])](https://drive.google.com/file/d/1J1YTfIWsN3fiVha21Qg0k1I2rGuXVrJu/view?usp=drive_link)
+[![Two Computers 2])](https://drive.google.com/file/d/1oxCPAR6arX9C6x8LmKouhRSKpJIKfLST/view?usp=drive_link)
+
+
 ## Introduction
 The `drone_simulator` project is a distributed simulation of a drone environment involving multiple processes. It demonstrates inter-process communication (IPC) using **DDS (Data Distribution Service)**, signal handling, error management, and logging in a multi-process system split across two computers.
+
+## Dependencies
+The project requires the following dependencies:
+- **Fast DDS**: For DDS communication.
+- **Curses**: For terminal handling.
+- **YAML**: For configuration file parsing.
+
+To install the dependencies, use the following commands:
+```sh
+sudo apt-get install libncursesw5-dev
+sudo apt-get install libyaml-dev
+```
 
 ## Installation
 1. **Clone the Repository**:
@@ -52,7 +73,8 @@ Modify settings in `config/config.yaml`. Defaults are used if missing.
    ```
 
 ## Architecture
-![Architecture Diagram](graphs/architecture.PNG)
+![Architecture Diagram](graphs/Slide3.PNG.PNG)
+![DDS Diagram](graphs/Slide4.PNG)
 
 The architecture consists of:
 - **Computer 1:** Runs the Blackboard, Server, Input Window, and Output Window processes.
@@ -139,3 +161,4 @@ Use log files in the `log` directory for diagnostics.
 
 ## Repository
 For more details, visit the [drone_simulator GitHub repository](https://github.com/MazenAtta/drone_simulator).
+

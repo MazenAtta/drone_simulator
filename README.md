@@ -1,7 +1,9 @@
 # Drone Simulator
 
 ## Table of Contents
+- [Project Demo](#project-demo)
 - [Introduction](#introduction)
+- [Dependencies](#dependencies)
 - [Installation](#installation)
 - [Configuration](#configuration)
 - [Usage](#usage)
@@ -15,10 +17,33 @@
 - [Debugging](#debugging)
 - [Repository](#repository)
 
+## Project Demo
+[![Simulation]](https://drive.google.com/file/d/1Ls6U9Yefj3TSpepzKYiHYZvU98UsjyHT/view?usp=drive_link)
+
+
 ## Introduction
 The `drone_simulator` project is a simple simulation of a drone environment involving multiple processes that communicate through named pipes. The project aims to demonstrate the usage of inter-process communication (IPC) techniques, signal handling, error management, and logging in a multi-process system.
 
+## Dependencies
+To build and run the `drone_simulator` project, you need the following dependencies:
+- `gcc` (GNU Compiler Collection)
+- `make` (Build automation tool)
+- `ncurses` (Library for text-based user interfaces)
+- `libyaml` (YAML parser and emitter library)
+
+Ensure these dependencies are installed on your system before proceeding with the installation.
+
 ## Installation
+1. **Clone the Repository**:
+   ```sh
+   git clone https://github.com/MazenAtta/drone_simulator.git
+   cd drone_simulator
+   ```
+
+2. **Build the Project**:
+   ```sh
+   make
+   ```
 1. **Clone the Repository**:
    ```sh
    git clone https://github.com/MazenAtta/drone_simulator.git

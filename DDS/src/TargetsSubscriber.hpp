@@ -161,7 +161,7 @@ public:
         participantQos.setup_transports(eprosima::fastdds::rtps::BuiltinTransports::LARGE_DATA);
 
 
-        participant_ = DomainParticipantFactory::get_instance()->create_participant(1, participantQos);
+        participant_ = DomainParticipantFactory::get_instance()->create_participant(0, participantQos);
 
         if (participant_ == nullptr)
         {

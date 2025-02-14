@@ -56,10 +56,10 @@ int main() {
     ObstaclesSubscriber* obstacle_subscriber = new ObstaclesSubscriber();
     TargetsSubscriber* target_subscriber = new TargetsSubscriber();
 
-    if (!obstacle_subscriber->init("ObstacleTopic")) {
+    if (!obstacle_subscriber->init("ObstaclesTopic")) {
         error_exit("Failed to initialize DDS Obstacle Subscriber");
     }
-    if (!target_subscriber->init("TargetTopic")) {
+    if (!target_subscriber->init("TargetsTopic")) {
         error_exit("Failed to initialize DDS Target Subscriber");
     }
 

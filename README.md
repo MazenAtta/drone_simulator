@@ -66,7 +66,13 @@ Modify settings in `config/config.yaml`. Defaults are used if missing.
    1
    ```
 
-2. **Run the Target & Obstacle Generator (Computer 2)**:
+2. **Run the Target & Obstacle Generators (Computer 2)**:
+   ```sh
+   ./run.sh
+   2
+   ```
+   
+3. **Run the Main Application & Target & Obstacle Generators (same computer)**:
    ```sh
    ./run.sh
    2

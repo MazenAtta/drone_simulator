@@ -24,7 +24,7 @@ int main() {
 
     // Initialize DDS publisher
     TargetsPublisher* publisher = new TargetsPublisher();
-    if (!publisher->init("TargetTopic")) {
+    if (!publisher->init("TargetsTopic")) {
         error_exit("Failed to initialize DDS Publisher");
     }
 

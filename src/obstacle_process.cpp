@@ -23,7 +23,7 @@ int main() {
 
     // Initialize DDS publisher
     ObstaclesPublisher* publisher = new ObstaclesPublisher();
-    if (!publisher->init("ObstacleTopic")) {
+    if (!publisher->init("ObstaclesTopic")) {
         error_exit("Failed to initialize DDS Publisher");
     }
 

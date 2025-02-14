@@ -20,7 +20,8 @@ cd ..
 echo "Select the process to run:"
 echo "1) Main Application"
 echo "2) Targets and Obstacles Generator"
-read -p "Enter your choice (1 or 2): " choice
+echo "3) Both"
+read -p "Enter your choice (1 or 2 or 3): " choice
 
 case $choice in
     1)
@@ -29,6 +30,13 @@ case $choice in
         ;;
     2)
         echo "Running Targets and Obstacles Generator..."
+        ./build/obstacle_process &
+        ./build/target_process &
+        wait # Wait for both processes to finish
+        ;;
+    3)
+        echo "Running Targets and Obstacles Generator..."
+        ./build/blackboard_process &
         ./build/obstacle_process &
         ./build/target_process &
         wait # Wait for both processes to finish
